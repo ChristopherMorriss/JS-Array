@@ -1,0 +1,46 @@
+//Mixin for flex display
+@mixin flex($flex-display,$flex-direction,$flex-wrap,$flex-align,$flex-justify){
+    display: $flex-display;
+    flex-direction: $flex-direction;
+    flex-wrap: $flex-wrap;
+    align-items: $flex-align;
+    justify-content: $flex-justify;
+}
+
+//Mixin for grid display
+@mixin grid($g-display,$g-row,$g-column,$gutter-row,$gutter-column){
+    display: $g-display;
+    grid-template-columns: $g-column;
+    grid-template-rows: $g-row;
+    row-gap: $gutter-row;
+    column-gap: $gutter-column;
+
+
+}
+
+//Mixin to replace the media query declarations 
+@mixin media($breakpoint){
+
+    @if $breakpoint =="small"{
+        @media (min-width:$sm){
+            @content;
+        }
+    }
+    @else if $breakpoint == "medium"{
+        @media (min-width:$m) and (max-width:$lg){
+            @content;
+        };
+    }
+
+    @else if $breakpoint =="large"{
+        @media (min-width: ($lg + 1)){
+            @content;
+
+        };
+    }
+    @else if $breakpoint =="x-large"{
+        @media (min-width: $xl){
+            @content;
+        };
+    }
+}

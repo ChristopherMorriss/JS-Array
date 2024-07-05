@@ -1,0 +1,16 @@
+button {
+  border-radius: 5px;
+  border: none;
+}
+
+@font-face {
+  font-family: "open sans";
+  src: url("../fonts/OpenSans-VariableFont_wdth,wght.ttf") format("truetype");
+}
+.open-sans-font {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}/*# sourceMappingURL=styles.css.map */
