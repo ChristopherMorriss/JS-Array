@@ -1,7 +1,13 @@
+* {
+  box-sizing: border-box;
+  font-family: "open sans";
+}
+
 button {
   border-radius: 5px;
   border: none;
   color: white;
+  cursor: pointer;
 }
 
 img {
@@ -47,4 +53,36 @@ small {
 .container {
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.green-btn {
+  background-color: green;
+}
+.green-btn:hover {
+  background-color: rgba(0, 128, 0, 0.345);
+}
+
+.orange-btn {
+  background-color: orange;
+}
+.orange-btn:hover {
+  background-color: rgba(255, 165, 0, 0.345);
+}
+
+.red-btn {
+  background-color: red;
+}
+.red-btn:hover {
+  background-color: rgba(255, 0, 0, 0.345);
+}
+
+.flex-btn {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
+  width: 100%;
+  margin-bottom: 10px;
 }/*# sourceMappingURL=styles.css.map */

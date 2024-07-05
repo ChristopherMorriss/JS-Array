@@ -1,7 +1,12 @@
+*{
+    box-sizing:border-box;
+    font-family: 'open sans';
+}
 button{
     border-radius: 5px;
     border:none;
     color:$btn-colour;
+    cursor: pointer;
 }
 
 img{
@@ -9,6 +14,7 @@ img{
 }
 
 small{
-    color: $small-colour;
+    color: $red;
     display:none;
 }
+

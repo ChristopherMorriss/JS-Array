@@ -13,22 +13,25 @@
     </head>
 
     <body>
+        <header>Photo Picker</header>
         <main class="container"> 
             <div class="picture-box">
-                <img src="https://picsum.photos/seed/picsum/500/500" alt="Random Image">
-                <hr />
-                <button class="black-btn">New Image</button>
-                <button class="green-btn">Add Image</button>
+                <img id="random-img" src="https://picsum.photos/seed/picsum/500/500" alt="Random Image">
+                <div class="flex-btn">
+                    <button class="orange-btn" id="new-image">New Image</button>
+                    <button class="green-btn" Onclick="addImage()">Add Image</button>
+                </div>
             </div>
             <div class="collection-box">  
                 <form>
                     <label for="email">Email:</label> 
                     <input type="text" id="email" class="form-object" placeholder="Email Address*">
                     <small id="required-email">Please enter a valid email</small>
-                    <button class="btn" class="form-object" id="submit" onclick="validateForm()">New Collection</button>
-                    <hr />
+                    <button class="green-btn" class="form-object" id="submit" onclick="validateForm()">New Collection</button>
+                    <hr>
                     <label for="select">Collection:</label>
                     <select name="select" id="select"></select>
+                    <button class="red-btn">Remove Collection</button>
                 </form>
             </div>
         </main> 

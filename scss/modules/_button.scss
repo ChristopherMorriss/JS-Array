@@ -1,0 +1,21 @@
+.green-btn{
+    @include hover($green,$opacity-green);
+}
+.orange-btn{
+    @include hover($orange,$opacity-orange);
+}
+.red-btn{
+    @include hover($red,$opacity-red);
+}
+
+.flex-btn{
+    @include flex($flex-display:flex,
+                  $flex-direction: row,
+                  $flex-wrap: wrap,
+                  $flex-align: center,
+                  $flex-justify: space-around
+                );
+    margin-top:10px;
+    width:100%;
+    margin-bottom:10px;
+}
