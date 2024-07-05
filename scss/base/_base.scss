@@ -1,4 +1,14 @@
 button{
     border-radius: 5px;
     border:none;
+    color:$btn-colour;
+}
+
+img{
+    max-width: 100%;
+}
+
+small{
+    color: $small-colour;
+    display:none;
 }

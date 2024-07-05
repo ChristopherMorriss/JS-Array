@@ -44,3 +44,10 @@
         };
     }
 }
+
+@mixin hover($bg_colour,$hover_colour){//One colour is assigned as the default and the other is used when the background is hovered over
+    background-color: $bg_colour;
+    &:hover{
+        background-color: $hover_colour;
+    }
+}

@@ -13,20 +13,24 @@
     </head>
 
     <body>
-        <main> 
+        <main class="container"> 
             <div class="picture-box">
                 <img src="https://picsum.photos/seed/picsum/500/500" alt="Random Image">
-                <button>New Image</button>
-                <button>Add Image</button>
-                <button>Settings</button>
+                <hr />
+                <button class="black-btn">New Image</button>
+                <button class="green-btn">Add Image</button>
             </div>
-
-            <form>
-                <label>Email:</label> 
-                <input type="text" id="email" class="form-object" placeholder="Email Address*">
-                <!-- <small id="required-email">Please enter a valid email</small> -->
-                <button class="btn" class="form-object" id="submit" onclick="validateForm()">New Collection</button>
-            </form>
+            <div class="collection-box">  
+                <form>
+                    <label for="email">Email:</label> 
+                    <input type="text" id="email" class="form-object" placeholder="Email Address*">
+                    <small id="required-email">Please enter a valid email</small>
+                    <button class="btn" class="form-object" id="submit" onclick="validateForm()">New Collection</button>
+                    <hr />
+                    <label for="select">Collection:</label>
+                    <select name="select" id="select"></select>
+                </form>
+            </div>
         </main> 
     <!-- JavaScript Links -->
     <script src="js/jquery-3.7.1.min.js"></script>
