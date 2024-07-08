@@ -18,6 +18,7 @@ function validateForm(){
         alert('Invalid email.');
       }
     }
+    addEmail();
   }
   let change=0;
   var image_rand = document.querySelector("#random-img");
@@ -26,8 +27,9 @@ function validateForm(){
     change += 1;
     alert('button pressed');
     if (change >= 0){
-      //alert('yes')
-      image_rand.src="https://picsum.photos/500/500";
+      image_rand="https://picsum.photos/500/500";
+      $('#random-img').attr('src', image_rand + '?random=' + new Date().getTime()); 
+      //The above line is used because simply setting image_rand.src to the photo path only works once
     }
   });
 
@@ -36,8 +38,9 @@ function addImage(){
 }
 
 function addEmail(){
-  select.innerHTML += `<option id ="${email1}" value="${email1}">${email1}</option>`;
+  alert('function called')
+  let email2 = JSON.parse(localStorage.getItem("email1"));
+  select.innerHTML += `<option id ="${email2}" value="${email2}">${email2}</option>`;
 }
-// const SELECT = document.getElementById("select");
 
 
