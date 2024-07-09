@@ -35,7 +35,7 @@ image_btn.addEventListener('click',()=>{ //Only generates a single new image aft
   //alert('button pressed');
   let image_rand="https://picsum.photos/500/500";
   $('#random-img').attr('src', image_rand + '?random=' + new Date().getTime()); 
- 
+  
   
   //The above line is used because simply setting image_rand.src to the photo path only works once
     
@@ -45,15 +45,17 @@ console.log(img_select);
 function addImage(){ //The function kind of works, but it displays the object code instead of the image itself
   //alert('button pressed')
   let collection_pictures=document.querySelector('.collection-pictures');
-  collection_pictures.innerHTML += `${img_select}`;
+  //collection_pictures.innerHTML += `${img_select}`;
+  collection_pictures.append(`${img_select}`);
   //console.log(img_select);
-
+  //<img id="img-${j}" src="${selected_collection[j]}" />
   } 
 
 let collection_deleter_all = document.querySelector('#delete-all');
 collection_deleter_all.addEventListener('click',()=>{
   select.innerHTML -= `<option id="${email1}" value="${email1}">${email1}</option>`;
   select.innerHTML += `<option>Select</option>`;
+  
 });
 
 var option_active = document.querySelector('option:checked');
@@ -62,18 +64,16 @@ console.log(option_active);
 select.addEventListener('change',()=>{
   var option_active = document.querySelector('option:checked');
   console.log(option_active);
-  //option_active.remove();
-  //select.remove(option_active);
-  
+  let collection_deleter_one = document.querySelector('#delete-one');
+  collection_deleter_one.addEventListener('click',()=>{
+    console.log(option_active); 
+    option_active.remove();
+    console.log(option_active);
+
+  });
   
 });
 
-let collection_deleter_one = document.querySelector('#delete-one');
-collection_deleter_one.addEventListener('click',()=>{
-  console.log(option_active); //Always considered to be 'select'
-  option_active.remove();
-  console.log(option_active);
 
-});
 
 
