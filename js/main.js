@@ -4,7 +4,7 @@ function validateForm(){
     //Above regex is used to try and validate all possible email addresses
     //let email1 = $('#email').val();
     let email1 = $('#email').val();
-    alert(email1);
+    //alert(email1);
     let test1= regex.test(email1); //Checks if the email entered follows one of the regular expressions specified above
                                    //If it does, test1 will be assigned to true. If not, it will be assigned to false
     
@@ -15,7 +15,7 @@ function validateForm(){
     }
     else{
       if (test1 === true){
-        alert('Email address validated.');
+        //alert('Email address validated.');
       }
       else {
         alert('Invalid email.');
@@ -42,13 +42,28 @@ image_btn.addEventListener('click',()=>{ //Only generates a single new image aft
 //     $('.img-collection').append(image_rand);
 //   } 
 
-let collection_deleter = document.querySelector('#delete');
-collection_deleter.addEventListener('click',()=>{
+let collection_deleter_all = document.querySelector('#delete-all');
+collection_deleter_all.addEventListener('click',()=>{
   select.innerHTML -= `<option id="${email1}" value="${email1}">${email1}</option>`;
+  select.innerHTML += `<option>Select</option>`;
 });
 
+let option_active = document.querySelector('option:last-child');
+select.addEventListener('change',()=>{
+  //alert(select.selectedOptions);
+  //alert(option_active);
+  //select.remove(option_active);
+  //alert('state changed');
+  
+});
 
+let collection_deleter_one = document.querySelector('#delete-one');
+collection_deleter_one.addEventListener('click',()=>{
+  option_active.remove();
+  //select.remove(selectedOptions);
+  //select.remove(option_active); //Currently only wants to delete the top option
+  //option_active.remove();
 
-
+});
 
 
