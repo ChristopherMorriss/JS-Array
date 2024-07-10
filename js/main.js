@@ -29,27 +29,31 @@ function validateForm(){
     addEmail();
   }
 
-  //var image_rand = document.querySelector("#random-img");
-let image_btn = document.querySelector('#new-image');
-image_btn.addEventListener('click',()=>{ //Only generates a single new image after pressing the button, need to fix this
-  //alert('button pressed');
-  let image_rand="https://picsum.photos/500/500";
-  $('#random-img').attr('src', image_rand + '?random=' + new Date().getTime()); 
-  
-  
-  //The above line is used because simply setting image_rand.src to the photo path only works once
-    
-  });
 let img_select= document.querySelector('img');
 console.log(img_select);
-function addImage(){ //The function kind of works, but it displays the object code instead of the image itself
-  //alert('button pressed')
-  let collection_pictures=document.querySelector('.collection-pictures');
-  //collection_pictures.innerHTML += `${img_select}`;
-  collection_pictures.append(`${img_select}`);
-  //console.log(img_select);
-  //<img id="img-${j}" src="${selected_collection[j]}" />
-  } 
+function newImage(){
+  let image_rand="https://picsum.photos/500/500";
+  let img_current = $('#random-img').attr('src', image_rand + '?random=' + new Date().getTime()); 
+  //The above line is used because simply setting image_rand.src to the photo path only works once
+  let add_image= document.querySelector('#add-image');
+  add_image.addEventListener('click',()=>{
+    let collection_pictures=document.querySelector('.collection-pictures');
+    collection_pictures.appendChild(img_select);
+  });
+}
+
+
+// function addImage(){ //The function kind of works, but it displays the object code instead of the image itself
+  
+//   let collection_pictures=document.querySelector('.collection-pictures');
+  
+//   collection_pictures.appendChild(img_select);
+//   newImage();
+//   //console.log(img_select);
+//   //<img id="img-${j}" src="${selected_collection[j]}" />
+//   } 
+
+
 
 let collection_deleter_all = document.querySelector('#delete-all');
 collection_deleter_all.addEventListener('click',()=>{
@@ -76,4 +80,8 @@ select.addEventListener('change',()=>{
 
 
 
+
+//Need to fix add image error 
+//Need to assign image to the relevant collection
+//Need to improve css styling 
 
