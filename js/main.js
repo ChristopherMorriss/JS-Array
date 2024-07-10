@@ -1,3 +1,4 @@
+let quantity =0;
 let email1 = $('#email').val();
 function validateForm(){
     let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
@@ -23,8 +24,8 @@ function validateForm(){
     }
     const select = document.querySelector('#select');
     function addEmail(){
-    select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
-    //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
+      select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
+      //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
     }
     addEmail();
   }
@@ -32,13 +33,17 @@ function validateForm(){
 let img_select= document.querySelector('img');
 console.log(img_select);
 function newImage(){
-  let image_rand="https://picsum.photos/500/500";
-  let img_current = $('#random-img').attr('src', image_rand + '?random=' + new Date().getTime()); 
-  //The above line is used because simply setting image_rand.src to the photo path only works once
+  let image_rand ="https://picsum.photos/500/500?random=" + new Date().getTime();
+  img_select.src= image_rand;
   let add_image= document.querySelector('#add-image');
   add_image.addEventListener('click',()=>{
+    quantity+=1;
     let collection_pictures=document.querySelector('.collection-pictures');
-    collection_pictures.appendChild(img_select);
+    collection_pictures.innerHTML =`<div><img id=image-${quantity} src=${image_rand}></div>`;
+    //collection_pictures.appendChild(img_select);
+    
+    // COLLECTION.innerHTML =
+		// 				`<img id="img-${selected_collection.length}" src="${IMG.src}" />` 
   });
 }
 
