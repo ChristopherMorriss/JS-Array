@@ -29,7 +29,7 @@ function validateForm(){
       console.log(option_active);
       quantity_email+=1;
       select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
-      collection_pictures.innerHTML += `<div id="email-${quantity_email}"></div>`;
+      collection_pictures.innerHTML += `<div id="div-${quantity_email}"></div>`;
       console.log(option_active);
       //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
     }
@@ -47,17 +47,17 @@ function newImage(){
 }
 add_image.addEventListener('click',()=>{
   console.log(option_active.textContent);
-  //if (option_active.textContent === "Select"){
-  quantity_images+=1;
-  //let collection_pictures=document.querySelector('.collection-pictures');
-  let email_collect= document.querySelector(`#email-${quantity_email}`);
-  console.log(image_rand);
-  console.log(email_collect);
-  email_collect.innerHTML +=`<img id=email-${quantity_images} src=${image_rand}>`;
-  //}
-  // else{
-  //   alert('A collection has not been selected yet');
-  // }
+  if (option_active.textContent !== "Select"){
+    quantity_images+=1;
+    let email_collect= document.querySelector(`#div-${quantity_email}`);
+    console.log(image_rand);
+    console.log(email_collect);
+    email_collect.innerHTML +=`<img id=email-${quantity_images} src=${image_rand}>`;
+
+  }
+  else{
+    alert('A collection has not been selected yet');
+  }
 });
 // if (!assignedImages[email].includes(currentImage)) {
 //   assignedImages[email].push(currentImage);
@@ -79,13 +79,13 @@ collection_deleter_all.addEventListener('click',()=>{
 });
 
 
-let option_active = document.querySelector('option:checked');
+option_active = document.querySelector('option:checked');
 console.log(option_active);
 
 function swapCollection(){
 //select.addEventListener('change',()=>{
   alert('state change detected');
-  let option_active = document.querySelector('option:checked');
+  option_active = document.querySelector('option:checked');
   console.log(option_active);
   $(`${email1}`).css('display','none');
   let collection_deleter_one = document.querySelector('#delete-one');
@@ -98,7 +98,7 @@ function swapCollection(){
 }
 //});
 
-
+newImage();
 
 
 
