@@ -40,23 +40,25 @@ let img_select= document.querySelector('img');
 console.log(img_select);
 let add_image= document.querySelector('#add-image');
 function newImage(){
-  let image_rand ="https://picsum.photos/500/500?random=" + new Date().getTime();
+  image_rand ="https://picsum.photos/500/500?random=" + new Date().getTime();
   img_select.src= image_rand;
-  add_image.addEventListener('click',()=>{
-    console.log(option_active.textContent);
-    if (option_active.textContent === "Select"){
-      quantity_images+=1;
-      //let collection_pictures=document.querySelector('.collection-pictures');
-      email_collect= document.querySelector(`#email-${quantity_email}`);
-      console.log(email_collect);
-      email_collect.innerHTML +=`<img id=email-${quantity_images} src=${image_rand}>`;
-    }
-    else{
-      alert('A collection has not been selected yet');
-    }
-  });
+  console.log(image_rand);
+  
 }
-
+add_image.addEventListener('click',()=>{
+  console.log(option_active.textContent);
+  //if (option_active.textContent === "Select"){
+  quantity_images+=1;
+  //let collection_pictures=document.querySelector('.collection-pictures');
+  let email_collect= document.querySelector(`#email-${quantity_email}`);
+  console.log(image_rand);
+  console.log(email_collect);
+  email_collect.innerHTML +=`<img id=email-${quantity_images} src=${image_rand}>`;
+  //}
+  // else{
+  //   alert('A collection has not been selected yet');
+  // }
+});
 // if (!assignedImages[email].includes(currentImage)) {
 //   assignedImages[email].push(currentImage);
 //   localStorage.setItem('assignedImages', JSON.stringify(assignedImages));
@@ -85,7 +87,7 @@ function swapCollection(){
   alert('state change detected');
   let option_active = document.querySelector('option:checked');
   console.log(option_active);
-  $(`${email}`).css('display','none');
+  $(`${email1}`).css('display','none');
   let collection_deleter_one = document.querySelector('#delete-one');
   collection_deleter_one.addEventListener('click',()=>{
     console.log(option_active); 
