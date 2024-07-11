@@ -1,5 +1,7 @@
-let quantity =0;
+let quantity_images =0;
+let quantity_email =0;
 let email1 = $('#email').val();
+let collection_pictures=document.querySelector('.collection-pictures');
 function validateForm(){
     let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
     //Above regex is used to try and validate all possible email addresses
@@ -24,7 +26,11 @@ function validateForm(){
     }
     const select = document.querySelector('#select');
     function addEmail(){
+      console.log(option_active);
+      quantity_email+=1;
       select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
+      collection_pictures.innerHTML += `<div id="email-${quantity_email}"></div>`;
+      console.log(option_active);
       //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
     }
     addEmail();
@@ -32,31 +38,34 @@ function validateForm(){
 
 let img_select= document.querySelector('img');
 console.log(img_select);
+let add_image= document.querySelector('#add-image');
 function newImage(){
   let image_rand ="https://picsum.photos/500/500?random=" + new Date().getTime();
   img_select.src= image_rand;
-  let add_image= document.querySelector('#add-image');
   add_image.addEventListener('click',()=>{
-    quantity+=1;
-    let collection_pictures=document.querySelector('.collection-pictures');
-    collection_pictures.innerHTML =`<div><img id=image-${quantity} src=${image_rand}></div>`;
-    //collection_pictures.appendChild(img_select);
-    
-    // COLLECTION.innerHTML =
-		// 				`<img id="img-${selected_collection.length}" src="${IMG.src}" />` 
+    console.log(option_active.textContent);
+    if (option_active.textContent === "Select"){
+      quantity_images+=1;
+      //let collection_pictures=document.querySelector('.collection-pictures');
+      email_collect= document.querySelector(`#email-${quantity_email}`);
+      console.log(email_collect);
+      email_collect.innerHTML +=`<img id=email-${quantity_images} src=${image_rand}>`;
+    }
+    else{
+      alert('A collection has not been selected yet');
+    }
   });
 }
 
-
-// function addImage(){ //The function kind of works, but it displays the object code instead of the image itself
-  
-//   let collection_pictures=document.querySelector('.collection-pictures');
-  
-//   collection_pictures.appendChild(img_select);
-//   newImage();
-//   //console.log(img_select);
-//   //<img id="img-${j}" src="${selected_collection[j]}" />
-//   } 
+// if (!assignedImages[email].includes(currentImage)) {
+//   assignedImages[email].push(currentImage);
+//   localStorage.setItem('assignedImages', JSON.stringify(assignedImages));
+//   loadAssignedImages();
+//   emailError.hide(); 
+// } else {
+//   emailError.text('This image is already assigned to this email.');
+//   emailError.show();
+// }
 
 
 
@@ -67,12 +76,16 @@ collection_deleter_all.addEventListener('click',()=>{
   
 });
 
-var option_active = document.querySelector('option:checked');
 
+let option_active = document.querySelector('option:checked');
 console.log(option_active);
-select.addEventListener('change',()=>{
-  var option_active = document.querySelector('option:checked');
+
+function swapCollection(){
+//select.addEventListener('change',()=>{
+  alert('state change detected');
+  let option_active = document.querySelector('option:checked');
   console.log(option_active);
+  $(`${email}`).css('display','none');
   let collection_deleter_one = document.querySelector('#delete-one');
   collection_deleter_one.addEventListener('click',()=>{
     console.log(option_active); 
@@ -80,13 +93,15 @@ select.addEventListener('change',()=>{
     console.log(option_active);
 
   });
-  
-});
+}
+//});
 
 
 
 
-//Need to fix add image error 
-//Need to assign image to the relevant collection
+
+
+//Need to change collection when a different collection is selected
+//Prevent email duplication
 //Need to improve css styling 
 
