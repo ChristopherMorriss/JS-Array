@@ -18,8 +18,7 @@ function validateForm(){
     }
     else{
       if (test1 === true){
-        addEmail();
-        //alert('Email address validated.');
+        alert('Email address validated.');
       }
       else {
         alert('Invalid email.');
@@ -34,7 +33,7 @@ function validateForm(){
       console.log(option_active);
       //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
     }
-    
+    addEmail();
   }
 
 let img_select= document.querySelector('img');
