@@ -24,7 +24,7 @@ function validateForm(){
         alert('Invalid email.');
       }
     }
-    const select = document.querySelector('#select');
+    let select = document.querySelector('#select');
     function addEmail(){
       console.log(option_active);
       quantity_email+=1;
