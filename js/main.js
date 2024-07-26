@@ -2,14 +2,25 @@ let quantity_images =0;
 let quantity_email =0;
 let email1 = $('#email').val();
 let collection_pictures=document.querySelector('.collection-pictures');
+let select = document.querySelector('#select');
 function validateForm(){
-    let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+    //let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
     //Above regex is used to try and validate all possible email addresses
+    let regex = new RegExp(/^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/);
     //let email1 = $('#email').val();
     let email1 = $('#email').val();
     //alert(email1);
     let test1= regex.test(email1); //Checks if the email entered follows one of the regular expressions specified above
                                    //If it does, test1 will be assigned to true. If not, it will be assigned to false
+    function addEmail(){
+      console.log(option_active);
+      quantity_email+=1;
+      console.log(email1);
+      select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
+      collection_pictures.innerHTML += `<div id="div-${quantity_email}"></div>`;
+      console.log(option_active);
+    //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
+    }
     
     if (email1=== ''){
       //$('#required-email').css('display','block'); //Code for the red text warning message, currently disabled
@@ -19,21 +30,15 @@ function validateForm(){
     else{
       if (test1 === true){
         alert('Email address validated.');
+        addEmail();
       }
       else {
         alert('Invalid email.');
       }
     }
-    let select = document.querySelector('#select');
-    function addEmail(){
-      console.log(option_active);
-      quantity_email+=1;
-      select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
-      collection_pictures.innerHTML += `<div id="div-${quantity_email}"></div>`;
-      console.log(option_active);
-      //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
-    }
-    addEmail();
+    
+    
+    
   }
 
 let img_select= document.querySelector('img');
@@ -53,21 +58,13 @@ add_image.addEventListener('click',()=>{
     console.log(image_rand);
     console.log(email_collect);
     email_collect.innerHTML +=`<img id=email-${quantity_images} src=${image_rand}>`;
+    newImage();
 
   }
   else{
     alert('A collection has not been selected yet');
   }
 });
-// if (!assignedImages[email].includes(currentImage)) {
-//   assignedImages[email].push(currentImage);
-//   localStorage.setItem('assignedImages', JSON.stringify(assignedImages));
-//   loadAssignedImages();
-//   emailError.hide(); 
-// } else {
-//   emailError.text('This image is already assigned to this email.');
-//   emailError.show();
-// }
 
 
 
@@ -103,7 +100,12 @@ newImage();
 
 
 
-//Need to change collection when a different collection is selected
-//Prevent email duplication
-//Need to improve css styling 
+/*JS Feedback points completed
+Submission passes HTML validator - https://validator.w3.org/
+Email input is correctly validated
 
+
+
+*/
+
+//test
