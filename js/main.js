@@ -3,6 +3,10 @@ let quantity_email =0;
 let email1 = $('#email').val();
 let collection_pictures=document.querySelector('.collection-pictures');
 let select = document.querySelector('#select');
+let readyForLinking =0;
+option_active = document.querySelector('option:checked');
+
+
 function validateForm(){
     //let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
     //Above regex is used to try and validate all possible email addresses
@@ -57,8 +61,9 @@ add_image.addEventListener('click',()=>{
     let email_collect= document.querySelector(`#div-${quantity_email}`);
     console.log(image_rand);
     console.log(email_collect);
-    email_collect.innerHTML +=`<img id=email-${quantity_images} src=${image_rand}>`;
-    collectionAdd();
+    //email_collect.innerHTML +=`<img class="${option_active.textContent}" src=${image_rand}>`;
+    email_collect.innerHTML +=`<p class="test-text">${option_active.textContent}<img class="email-${option_active.textContent}" src=${image_rand}></p>`;
+    readyForLinking+=1;
     //newImage();
 
   }
@@ -77,12 +82,11 @@ collection_deleter_all.addEventListener('click',()=>{
 });
 
 
-option_active = document.querySelector('option:checked');
-console.log(option_active);
+
 
 function swapCollection(){
 //select.addEventListener('change',()=>{
-  alert('state change detected');
+  //alert('state change detected');
   option_active = document.querySelector('option:checked');
   console.log(option_active);
   $(`${email1}`).css('display','none');
@@ -93,13 +97,23 @@ function swapCollection(){
     console.log(option_active);
 
   });
+  if (readyForLinking >= 1){
+    option_linked=document.querySelector('.test-text');
+    console.log(option_linked.textContent);
+    console.log(option_active.textContent);
+    if (option_active.textContent === option_linked.textContent){
+      alert('Successfully linked!');
+      $('.test-text').css('display','block');
+    }
+    else{
+      $('.test-text').css('display','none');
+    }
+  }
 }
 //});
 
 newImage();
-function collectionAdd(){
-  console.log('Adding to collection...');
-}
+
 
 
 
