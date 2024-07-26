@@ -58,7 +58,8 @@ add_image.addEventListener('click',()=>{
     console.log(image_rand);
     console.log(email_collect);
     email_collect.innerHTML +=`<img id=email-${quantity_images} src=${image_rand}>`;
-    newImage();
+    collectionAdd();
+    //newImage();
 
   }
   else{
@@ -96,16 +97,29 @@ function swapCollection(){
 //});
 
 newImage();
+function collectionAdd(){
+  console.log('Adding to collection...');
+}
 
 
 
 
-/*JS Feedback points completed
+/*
+JS Feedback points completed:
+
 Submission passes HTML validator - https://validator.w3.org/
 Email input is correctly validated
+Clear and useful validation message displayed to user
 
 
-
+JS Tasks to complete:
+If other inputs are present, confirm these are correctly validated
+The new image can be assigned to a valid email
+Assigned images are displayed clearly with the email it has been assigned to
+Email is only show once for all images assigned, not once for each image. 
+The same image can be assigned to multiple emails 
+The same image cannot be assigned to the same email 
+Consistent and professional looking colour scheme
+Hover styles for button and clickables
+Page is responsive
 */
-
-//test
