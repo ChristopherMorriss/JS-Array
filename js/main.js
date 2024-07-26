@@ -85,7 +85,6 @@ collection_deleter_all.addEventListener('click',()=>{
 
 
 function swapCollection(){
-//select.addEventListener('change',()=>{
   alert('state change detected');
   option_active = document.querySelector('option:checked');
   console.log(option_active);
@@ -103,34 +102,21 @@ function swapCollection(){
       console.log(option_linked[i].textContent);
       if (option_active.textContent === option_linked[i].textContent){
         console.log('linked!');
-        //alert('Successfully linked!');
-        //$('.test-text').css('display','block');
-        if (option_linked[i].style.display =='none'){
-          console.log('Changing to visible');
-          option_linked[i].style.display ='inline';
-          console.log(option_linked[i]);
-        }
-        
+        console.log('Changing to visible');
+        option_linked[i].style.display ='block';
+        console.log(option_linked[i]);
       }
       else{
         console.log('not linked!')
         console.log(option_linked[i]);
         option_linked[i].style.display ='none';
-        //$('.test-text').css('display','none');
       }
     }
     //console.log(option_linked.textContent); 
     console.log(option_active.textContent); //This changes
-    if (option_active.textContent === option_linked.textContent){
-      alert('Successfully linked!');
-      $('.test-text').css('display','block');
-    }
-    else{
-      $('.test-text').css('display','none');
-    }
   }
 }
-//});
+
 
 newImage();
 
