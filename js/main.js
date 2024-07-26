@@ -86,7 +86,7 @@ collection_deleter_all.addEventListener('click',()=>{
 
 function swapCollection(){
 //select.addEventListener('change',()=>{
-  //alert('state change detected');
+  alert('state change detected');
   option_active = document.querySelector('option:checked');
   console.log(option_active);
   $(`${email1}`).css('display','none');
@@ -97,10 +97,30 @@ function swapCollection(){
     console.log(option_active);
 
   });
-  if (readyForLinking >= 1){
-    option_linked=document.querySelector('.test-text');
-    console.log(option_linked.textContent);
-    console.log(option_active.textContent);
+  if (readyForLinking > 0){
+    option_linked=document.querySelectorAll('.test-text'); //Static, need to change this whenever a new image is added
+    for (let i=0; i<option_linked.length; i++){
+      console.log(option_linked[i].textContent);
+      if (option_active.textContent === option_linked[i].textContent){
+        console.log('linked!');
+        //alert('Successfully linked!');
+        //$('.test-text').css('display','block');
+        if (option_linked[i].style.display =='none'){
+          console.log('Changing to visible');
+          option_linked[i].style.display ='inline';
+          console.log(option_linked[i]);
+        }
+        
+      }
+      else{
+        console.log('not linked!')
+        console.log(option_linked[i]);
+        option_linked[i].style.display ='none';
+        //$('.test-text').css('display','none');
+      }
+    }
+    //console.log(option_linked.textContent); 
+    console.log(option_active.textContent); //This changes
     if (option_active.textContent === option_linked.textContent){
       alert('Successfully linked!');
       $('.test-text').css('display','block');
