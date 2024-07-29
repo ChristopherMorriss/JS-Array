@@ -17,12 +17,12 @@ function validateForm(){
     let test1= regex.test(email1); //Checks if the email entered follows one of the regular expressions specified above
                                    //If it does, test1 will be assigned to true. If not, it will be assigned to false
     function addEmail(){
-      console.log(option_active);
       quantity_email+=1;
-      console.log(email1);
+      // for(i=0;i<email1.length;i++){
+      //   if (email_collect[i].textContent === )
+      // }
       select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
       collection_pictures.innerHTML += `<div id="div-${quantity_email}"></div>`;
-      console.log(option_active);
     //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
     }
     
@@ -46,22 +46,16 @@ function validateForm(){
   }
 
 let img_select= document.querySelector('img');
-console.log(img_select);
 let add_image= document.querySelector('#add-image');
 function newImage(){
   image_rand ="https://picsum.photos/500/500?random=" + new Date().getTime();
   img_select.src= image_rand;
-  console.log(image_rand);
   
 }
 add_image.addEventListener('click',()=>{
-  console.log(option_active.textContent);
   if (option_active.textContent !== "Select"){
     quantity_images+=1;
     let email_collect= document.querySelector(`#div-${quantity_email}`);
-    console.log(image_rand);
-    console.log(email_collect);
-    //email_collect.innerHTML +=`<img class="${option_active.textContent}" src=${image_rand}>`;
     email_collect.innerHTML +=`<p class="test-text">${option_active.textContent}<img class="email-${option_active.textContent}" src=${image_rand}></p>`;
     readyForLinking+=1;
     //newImage();
@@ -72,48 +66,40 @@ add_image.addEventListener('click',()=>{
   }
 });
 
-
+let collection_deleter_one = document.querySelector('#delete-one');
+  collection_deleter_one.addEventListener('click',()=>{ 
+    if (option_active.textContent !== "Select"){
+    option_active.remove();
+    $('p').css('display','none');
+   }
+   else{
+    alert('Please select the collection you would like to delete');
+   }
+});
 
 let collection_deleter_all = document.querySelector('#delete-all');
 collection_deleter_all.addEventListener('click',()=>{
   select.innerHTML -= `<option id="${email1}" value="${email1}">${email1}</option>`;
   select.innerHTML += `<option>Select</option>`;
-  
+  $('p').remove();
 });
-
 
 
 
 function swapCollection(){
   alert('state change detected');
   option_active = document.querySelector('option:checked');
-  console.log(option_active);
   $(`${email1}`).css('display','none');
-  let collection_deleter_one = document.querySelector('#delete-one');
-  collection_deleter_one.addEventListener('click',()=>{
-    console.log(option_active); 
-    option_active.remove();
-    console.log(option_active);
-
-  });
   if (readyForLinking > 0){
-    option_linked=document.querySelectorAll('.test-text'); //Static, need to change this whenever a new image is added
+    option_linked=document.querySelectorAll('.test-text'); 
     for (let i=0; i<option_linked.length; i++){
-      console.log(option_linked[i].textContent);
       if (option_active.textContent === option_linked[i].textContent){
-        console.log('linked!');
-        console.log('Changing to visible');
         option_linked[i].style.display ='block';
-        console.log(option_linked[i]);
       }
       else{
-        console.log('not linked!')
-        console.log(option_linked[i]);
         option_linked[i].style.display ='none';
       }
     }
-    //console.log(option_linked.textContent); 
-    console.log(option_active.textContent); //This changes
   }
 }
 
@@ -130,16 +116,15 @@ JS Feedback points completed:
 Submission passes HTML validator - https://validator.w3.org/
 Email input is correctly validated
 Clear and useful validation message displayed to user
-
-
-JS Tasks to complete:
-If other inputs are present, confirm these are correctly validated
 The new image can be assigned to a valid email
 Assigned images are displayed clearly with the email it has been assigned to
-Email is only show once for all images assigned, not once for each image. 
+Email is only show once for all images assigned, not once for each image
 The same image can be assigned to multiple emails 
+Hover styles for button and clickables
+If other inputs are present, confirm these are correctly validated
+
+JS Tasks to complete:
 The same image cannot be assigned to the same email 
 Consistent and professional looking colour scheme
-Hover styles for button and clickables
 Page is responsive
 */

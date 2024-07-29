@@ -59,21 +59,21 @@ small {
   background-color: green;
 }
 .green-btn:hover {
-  background-color: rgba(0, 128, 0, 0.345);
+  background-color: rgb(0, 38, 0);
 }
 
 .orange-btn {
   background-color: orange;
 }
 .orange-btn:hover {
-  background-color: rgba(255, 165, 0, 0.345);
+  background-color: rgb(116, 76, 1);
 }
 
 .red-btn {
   background-color: red;
 }
 .red-btn:hover {
-  background-color: rgba(255, 0, 0, 0.345);
+  background-color: rgb(117, 1, 1);
 }
 
 .flex-btn {
