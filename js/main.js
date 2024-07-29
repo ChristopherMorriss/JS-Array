@@ -9,8 +9,7 @@ let readyForLinking =0; //Prevents an error created when switching collections b
 let add_email_to_list =0;
 let add_image_to_list =0;
 option_active = document.querySelector('option:checked'); //Keeps track of the current selected option
-
-
+option_linked=document.querySelectorAll('.test-text'); 
 function validateForm(){
     //Below regex is used to validate emails
     let regex = new RegExp(/^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/);
@@ -69,6 +68,22 @@ function validateForm(){
     
   }
 
+function swapCollection(){
+  alert('state change detected');
+  option_active = document.querySelector('option:checked');
+  $(`${email1}`).css('display','none');
+  if (readyForLinking > 0){
+    option_linked=document.querySelectorAll('.test-text'); 
+    for (let i=0; i<option_linked.length; i++){
+      if (option_active.textContent === option_linked[i].textContent){
+        option_linked[i].style.display ='block';
+      }
+      else{
+        option_linked[i].style.display ='none';
+       }
+      }
+    }
+  }
 let img_select= document.querySelector('img');
 let add_image= document.querySelector('#add-image');
 function newImage(){
@@ -87,16 +102,22 @@ add_image.addEventListener('click',()=>{
       readyForLinking+=1; 
     }
     else{
-      for(i=0;i<usedImage.length;i++){
-        if (usedImage[i] == image_rand){
-            if (option_active.textContent === option_linked[i].textContent){
-              alert('You have already added this image to a collection');
-              add_image_to_list =0;
-              break;
+      for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
+        if (usedImage[j] == image_rand){
+          alert('image already in a collection');
+          option_linked=document.querySelectorAll('.test-text'); 
+          for(let k=0; k<option_linked.length; k++){
+            console.log(option_active.textContent);
+            console.log(option_linked[k].textContent);
+            if(option_active.textContent === option_linked[k].textContent){
+              alert('images already exists in this collection');
+              add_image_to_list=0;
             }
             else{
               add_image_to_list +=1;
             }
+
+          }
         }
         else{
           add_image_to_list +=1;
@@ -109,7 +130,7 @@ add_image.addEventListener('click',()=>{
       }
     }
     
-    //readyForLinking+=1; 
+    
 
   }
   else{ //If you haven't selected a collection (the contents of the button are the default Select), this message will show
@@ -120,39 +141,27 @@ add_image.addEventListener('click',()=>{
 let collection_deleter_one = document.querySelector('#delete-one');
   collection_deleter_one.addEventListener('click',()=>{ 
     if (option_active.textContent !== "Select"){
-    option_active.remove(); //Removes the current option from the select menu and changes to default option
-    $('p').css('display','none'); //Hides all images inside <p> tags until another collection is selected
-   }                              //<p> are targeted instead of <img> to prevent the hiding of the image in the top box
-   else{ //You are not allowed to delete the default "Select" option, so you will be shown this message if you try to delete it
-    alert('Please select the collection you would like to delete');
-   }
+      usedEmailAddress.pop(option_active.textContent); 
+      option_active.remove();//Removes the current option from the select menu and changes to default option
+      $('p').css('display','none'); //Hides all images inside <p> tags until another collection is selected
+    }                              //<p> are targeted instead of <img> to prevent the hiding of the image in the top box
+    else{ //You are not allowed to delete the default "Select" option, so you will be shown this message if you try to delete it
+      alert('Please select the collection you would like to delete');
+    }
 });
 
 let collection_deleter_all = document.querySelector('#delete-all');
 collection_deleter_all.addEventListener('click',()=>{
   select.innerHTML -= `<option id="${email1}" value="${email1}">${email1}</option>`;
   select.innerHTML += `<option>Select</option>`;
+  usedEmailAddress =[];
   $('p').remove(); //Removes all images contained inside <p> tags 
 });
 
 
 
-function swapCollection(){
-  alert('state change detected');
-  option_active = document.querySelector('option:checked');
-  $(`${email1}`).css('display','none');
-  if (readyForLinking > 0){
-    option_linked=document.querySelectorAll('.test-text'); 
-    for (let i=0; i<option_linked.length; i++){
-      if (option_active.textContent === option_linked[i].textContent){
-        option_linked[i].style.display ='block';
-      }
-      else{
-        option_linked[i].style.display ='none';
-      }
-    }
-  }
-}
+
+
 
 
 newImage();
@@ -178,4 +187,11 @@ JS Tasks to complete:
 The same image cannot be assigned to the same email 
 Consistent and professional looking colour scheme
 Page is responsive
+*/
+
+/*Other:
+Smaller Pictures
+Input text clear 
+Fix delete button issue where you can add to a deleted collection
+Fix image validation issues
 */
