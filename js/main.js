@@ -24,7 +24,7 @@ function validateForm(){
         usedEmailAddress.push(email1);
         console.log(usedEmailAddress);
         select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
-        collection_pictures.innerHTML += `<div id="div-${quantity_email}"></div>`;
+        collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`;
       }
       else{
         for(i=0;i<usedEmailAddress.length;i++){
@@ -40,7 +40,7 @@ function validateForm(){
         if (add_email_to_list >=1){
           usedEmailAddress.push(email1);
           select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
-          collection_pictures.innerHTML += `<div id="div-${quantity_email}"></div>`;
+          collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; 
           add_email_to_list =0;
         }
       }
@@ -70,7 +70,7 @@ function validateForm(){
   }
 
 function swapCollection(){
-  alert('state change detected');
+  //alert('state change detected');
   option_active = document.querySelector('option:checked');
   $(`${email1}`).css('display','none');
   if (readyForLinking > 0){
@@ -94,53 +94,95 @@ function newImage(){
 }
 add_image.addEventListener('click',()=>{
   let email_collect= document.querySelector(`#div-${quantity_email}`);
+  //console.log(email_collect.textContent);
   if (option_active.textContent !== "Select"){ 
     quantity_images+=1;
     if (usedImage.length == 0){
-      usedImage.push(image_rand);
-      if (option_active != "Select"){
+      if (option_active.textContent !== "Select"){ 
+        usedImage.push(image_rand);
         email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
-        console.log(usedImage);
-        readyForLinking+=1; 
+        //console.log(usedImage);
+        readyForLinking+=1;
       }
-      else {
-        alert('A collection has not been selected yet');
-      }
-      
+      else{
+        alert('Image already exists in this collection')
+      }       
     }
     else{
-      option_linked=document.querySelectorAll('.test-text'); 
-      for(let k=0; k<option_linked.length; k++){
-        console.log(option_active.textContent);
-        console.log(option_linked[k].textContent);
-        if(option_active.textContent === option_linked[k].textContent){
-          for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
-            console.log(usedImage[j]);
-            console.log(image_rand);
-            if (usedImage[j] == image_rand){
-                add_image_to_list=0;
-                image_alert=1;
-                
+      for(m=1;m<select.length;m+=1){
+        //console.log(select.length);
+        let email_collect= document.querySelector(`#div-${m}`);
+        console.log(m);
+        console.log(email_collect.textContent); //Displays the text twice at m=2?!
+        if(option_active.textContent === email_collect.textContent){
+          // email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
+          // console.log(usedImage);   
+          option_linked=document.querySelectorAll('.test-text'); 
+          for(let k=0; k<option_linked.length; k++){
+            console.log(option_active.textContent);
+            console.log(option_linked[k].textContent);
+            if(option_active.textContent === option_linked[k].textContent){
+              for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
+                //console.log(usedImage[j]);
+                //console.log(image_rand);
+                if (usedImage[j] == image_rand){
+                  add_image_to_list=0;
+                  image_alert=1;
+                    
+                }
+                else{
+                    add_image_to_list +=1;
+                }
+        
+                  
+                }
             }
             else{
                 add_image_to_list +=1;
             }
-    
-              
-            }
+          }
+          if (add_image_to_list >=1){
+            usedImage.push(image_rand);
+            email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
+            console.log(email_collect.textContent);
+            add_image_to_list =0;
+          }
+          else if (image_alert==1){
+            alert('Image already exists in this collection');
+          }
         }
-        else{
-            add_image_to_list +=1;
-        }
-      }
-      if (add_image_to_list >=1){
-        usedImage.push(image_rand);
-        email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
-        add_image_to_list =0;
-      }
-      else if (image_alert==1){
-        alert('Image already exists in this collection');
-      }
+        // option_linked=document.querySelectorAll('.test-text'); 
+        // for(let k=0; k<option_linked.length; k++){
+        //   console.log(option_active.textContent);
+        //   console.log(option_linked[k].textContent);
+        //   if(option_active.textContent === option_linked[k].textContent){
+        //     for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
+        //       //console.log(usedImage[j]);
+        //       //console.log(image_rand);
+        //       if (usedImage[j] == image_rand){
+        //           add_image_to_list=0;
+        //           image_alert=1;
+                  
+        //       }
+        //       else{
+        //           add_image_to_list +=1;
+        //       }
+      
+                
+        //       }
+        //   }
+        //   else{
+        //       add_image_to_list +=1;
+        //   }
+        // }
+        // if (add_image_to_list >=1){
+        //   usedImage.push(image_rand);
+        //   email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
+        //   add_image_to_list =0;
+        // }
+        // else if (image_alert==1){
+        //   alert('Image already exists in this collection');
+        // }
     // else{
     //   for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
     //     if (usedImage[j] == image_rand){
@@ -175,6 +217,7 @@ add_image.addEventListener('click',()=>{
     
     
 
+    }
   }
   else{ //If you haven't selected a collection (the contents of the button are the default Select), this message will show
     alert('A collection has not been selected yet');
@@ -187,7 +230,8 @@ let collection_deleter_one = document.querySelector('#delete-one');
       usedEmailAddress.pop(option_active.textContent); 
       option_active.remove();//Removes the current option from the select menu and changes to default option
       $('p').css('display','none'); //Hides all images inside <p> tags until another collection is selected
-    }                              //<p> are targeted instead of <img> to prevent the hiding of the image in the top box
+      quantity_email-=1;//<p> are targeted instead of <img> to prevent the hiding of the image in the top box
+    }                              
     else{ //You are not allowed to delete the default "Select" option, so you will be shown this message if you try to delete it
       alert('Please select the collection you would like to delete');
     }
@@ -197,6 +241,7 @@ let collection_deleter_all = document.querySelector('#delete-all');
 collection_deleter_all.addEventListener('click',()=>{
   select.innerHTML -= `<option id="${email1}" value="${email1}">${email1}</option>`;
   select.innerHTML += `<option>Select</option>`;
+  usedImage = [];
   usedEmailAddress =[];
   $('p').remove(); //Removes all images contained inside <p> tags 
   for(l=0;l<quantity_email;l+=0){ //The loop itself doesn't increment, the quantity email number decrements instead
