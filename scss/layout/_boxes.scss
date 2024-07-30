@@ -1,5 +1,5 @@
 .picture-box{
-    border: 1px solid;
+    border: 2px solid;
     @include flex($flex-display:flex,
                   $flex-direction: column,
                   $flex-wrap: wrap,
@@ -7,11 +7,14 @@
                   $flex-justify: space-between
                 );
     margin-bottom:10px;
+    // img{
+    //   background-size: cover;
+    // }
 
 };
 
 .collection-box{
-    border: 1px solid;
+    border: 2px solid;
     @include flex($flex-display:flex,
                   $flex-direction: column,
                   $flex-wrap: wrap,

@@ -8,6 +8,7 @@ let usedImage =[];
 let readyForLinking =0; //Prevents an error created when switching collections before adding an image to the page
 let add_email_to_list =0;
 let add_image_to_list =0;
+let image_alert =0;
 option_active = document.querySelector('option:checked'); //Keeps track of the current selected option
 option_linked=document.querySelectorAll('.test-text'); 
 function validateForm(){
@@ -97,37 +98,73 @@ add_image.addEventListener('click',()=>{
     quantity_images+=1;
     if (usedImage.length == 0){
       usedImage.push(image_rand);
-      email_collect.innerHTML +=`<p class="test-text">${option_active.textContent}<img class="email-${option_active.textContent}" src=${image_rand}></p>`;
+      email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
       console.log(usedImage);
       readyForLinking+=1; 
     }
     else{
-      for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
-        if (usedImage[j] == image_rand){
-          alert('image already in a collection');
-          option_linked=document.querySelectorAll('.test-text'); 
-          for(let k=0; k<option_linked.length; k++){
-            console.log(option_active.textContent);
-            console.log(option_linked[k].textContent);
-            if(option_active.textContent === option_linked[k].textContent){
-              alert('images already exists in this collection');
-              add_image_to_list=0;
+      option_linked=document.querySelectorAll('.test-text'); 
+      for(let k=0; k<option_linked.length; k++){
+        console.log(option_active.textContent);
+        console.log(option_linked[k].textContent);
+        if(option_active.textContent === option_linked[k].textContent){
+          for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
+            console.log(usedImage[j]);
+            console.log(image_rand);
+            if (usedImage[j] == image_rand){
+                add_image_to_list=0;
+                image_alert=1;
+                
             }
             else{
-              add_image_to_list +=1;
+                add_image_to_list +=1;
             }
-
-          }
+    
+              
+            }
         }
         else{
-          add_image_to_list +=1;
+            add_image_to_list +=1;
         }
       }
       if (add_image_to_list >=1){
         usedImage.push(image_rand);
-        email_collect.innerHTML +=`<p class="test-text">${option_active.textContent}<img class="email-${option_active.textContent}" src=${image_rand}></p>`;
+        email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
         add_image_to_list =0;
       }
+      else if (image_alert==1){
+        alert('Image already exists in this collection');
+      }
+    // else{
+    //   for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
+    //     if (usedImage[j] == image_rand){
+    //       option_linked=document.querySelectorAll('.test-text'); 
+    //       for(let k=0; k<option_linked.length; k++){
+    //         console.log(option_active.textContent);
+    //         console.log(option_linked[k].textContent);
+    //         if(option_active.textContent === option_linked[k].textContent){
+    //           alert('images already exists in this collection');
+    //           add_image_to_list=0;
+    //           //image_alert=1;
+    //         }
+    //         else{
+    //           add_image_to_list +=1;
+    //         }
+
+    //       }
+    //     }
+    //     else{
+    //       add_image_to_list +=1;
+    //     }
+    //   }
+    //   if (add_image_to_list >=1){
+    //     usedImage.push(image_rand);
+    //     email_collect.innerHTML +=`<p class="test-text">${option_active.textContent}<img class="email-${option_active.textContent}" src=${image_rand}></p>`;
+    //     add_image_to_list =0;
+    //   }
+      // /*else if (image_alert ==1){
+      //   alert('Image already exists in this collection');
+      // } */
     }
     
     
