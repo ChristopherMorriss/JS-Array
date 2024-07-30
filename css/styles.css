@@ -34,7 +34,6 @@ header {
 }
 
 p img {
-  max-width: 30%;
   max-height: 30%;
 }
 
@@ -59,6 +58,15 @@ p img {
   justify-content: space-between;
   margin-bottom: 10px;
 }
+@media (min-width: 1260px) {
+  .picture-box {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
 
 .collection-box {
   border: 2px solid;
@@ -69,9 +77,18 @@ p img {
   justify-content: space-between;
 }
 
+#email {
+  width: 75%;
+}
+
 .container {
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.red-btn, .picture-box, #email, #select {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .green-btn {

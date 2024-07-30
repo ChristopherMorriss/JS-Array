@@ -7,9 +7,16 @@
                   $flex-justify: space-between
                 );
     margin-bottom:10px;
-    // img{
-    //   background-size: cover;
-    // }
+    @include media(x-large){
+      @include flex($flex-display:flex,
+                  $flex-direction: column,
+                  $flex-wrap: wrap,
+                  $flex-align: center,
+                  $flex-justify: space-evenly
+                );
+    };
+    @extend %vertical_margin;
+    
 
 };
 
@@ -22,3 +29,13 @@
                   $flex-justify: space-between
                 );
 }
+
+#email{
+  width:75%;
+  @extend %vertical_margin;
+}
+
+#select{
+  @extend %vertical_margin;
+}
+

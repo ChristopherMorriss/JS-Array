@@ -199,8 +199,6 @@ collection_deleter_all.addEventListener('click',()=>{
 
 
 
-
-
 newImage();
 
 
