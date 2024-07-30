@@ -64,7 +64,7 @@ p img {
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
   }
 }
 
@@ -86,7 +86,7 @@ p img {
   margin-right: 5%;
 }
 
-.red-btn, .picture-box, #email, #select {
+.red-btn, #email, #select {
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -117,8 +117,13 @@ p img {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-top: 10px;
   width: 100%;
   margin-bottom: 10px;
+}
+@media (min-width: 559px) {
+  .flex-btn {
+    width: 500px;
+  }
 }/*# sourceMappingURL=styles.css.map */

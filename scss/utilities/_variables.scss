@@ -10,7 +10,7 @@ $red: red;
 $opacity-red: rgb(117, 1, 1);
 
 //Breakpoints
-$sm:576px; 
+$sm:559px; //559px instead of 578px to prevent an odd layout for the .flex-btn buttons between 559px and 578px
 $m:768px;  
 $lg:993px; 
 $xl:1260px; 

@@ -12,10 +12,10 @@
                   $flex-direction: column,
                   $flex-wrap: wrap,
                   $flex-align: center,
-                  $flex-justify: space-evenly
+                  $flex-justify: space-between
                 );
     };
-    @extend %vertical_margin;
+   
     
 
 };

@@ -14,10 +14,14 @@
                   $flex-direction: row,
                   $flex-wrap: wrap,
                   $flex-align: center,
-                  $flex-justify: space-around
+                  $flex-justify: space-between
                 );
     margin-top:10px;
     width:100%;
+    @include media(small){
+        width:500px; //Keeps the buttons inline with the image above it
+    }
+    
     margin-bottom:10px;
     
 }

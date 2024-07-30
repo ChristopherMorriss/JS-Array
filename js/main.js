@@ -98,9 +98,15 @@ add_image.addEventListener('click',()=>{
     quantity_images+=1;
     if (usedImage.length == 0){
       usedImage.push(image_rand);
-      email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
-      console.log(usedImage);
-      readyForLinking+=1; 
+      if (option_active != "Select"){
+        email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
+        console.log(usedImage);
+        readyForLinking+=1; 
+      }
+      else {
+        alert('A collection has not been selected yet');
+      }
+      
     }
     else{
       option_linked=document.querySelectorAll('.test-text'); 
@@ -193,6 +199,10 @@ collection_deleter_all.addEventListener('click',()=>{
   select.innerHTML += `<option>Select</option>`;
   usedEmailAddress =[];
   $('p').remove(); //Removes all images contained inside <p> tags 
+  for(l=0;l<quantity_email;l+=0){ //The loop itself doesn't increment, the quantity email number decrements instead
+    $(`#div-${quantity_email}`).remove();
+    quantity_email-=1;
+  }
 });
 
 
@@ -217,11 +227,11 @@ Email is only show once for all images assigned, not once for each image
 The same image can be assigned to multiple emails 
 Hover styles for button and clickables
 If other inputs are present, confirm these are correctly validated
+Page is responsive
 
 JS Tasks to complete:
 The same image cannot be assigned to the same email 
 Consistent and professional looking colour scheme
-Page is responsive
 */
 
 /*Other:
