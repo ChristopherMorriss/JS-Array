@@ -31,6 +31,7 @@ function validateForm(){
           if (usedEmailAddress[i] == email1){
               alert('You have already added this email as a collection');
               add_email_to_list =0;
+              quantity_email-=1;
               break;
           }
           else{
@@ -69,22 +70,7 @@ function validateForm(){
     
   }
 
-function swapCollection(){
-  //alert('state change detected');
-  option_active = document.querySelector('option:checked');
-  $(`${email1}`).css('display','none');
-  if (readyForLinking > 0){
-    option_linked=document.querySelectorAll('.test-text'); 
-    for (let i=0; i<option_linked.length; i++){
-      if (option_active.textContent === option_linked[i].textContent){
-        option_linked[i].style.display ='block';
-      }
-      else{
-        option_linked[i].style.display ='none';
-       }
-      }
-    }
-  }
+
 let img_select= document.querySelector('img');
 let add_image= document.querySelector('#add-image');
 function newImage(){
@@ -100,31 +86,34 @@ add_image.addEventListener('click',()=>{
     if (usedImage.length == 0){
       if (option_active.textContent !== "Select"){ 
         usedImage.push(image_rand);
-        email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
-        //console.log(usedImage);
+        email_collect.innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
+        //console.log(usedImage); <span>${option_active.textContent}</span> for above
         readyForLinking+=1;
       }
       else{
-        alert('Image already exists in this collection')
+        alert('Image already exists in this collection');
       }       
     }
     else{
       for(m=1;m<select.length;m+=1){
-        //console.log(select.length);
+        console.log(select[m]);
         let email_collect= document.querySelector(`#div-${m}`);
+        console.log(email_collect);
         console.log(m);
-        console.log(email_collect.textContent); //Displays the text twice at m=2?!
-        if(option_active.textContent === email_collect.textContent){
-          // email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
-          // console.log(usedImage);   
-          option_linked=document.querySelectorAll('.test-text'); 
+        console.log(option_active.textContent);
+        console.log(email_collect.textContent); 
+        if(option_active.textContent === email_collect.textContent){ //Assigns the image to the div linked with the email address
+          //email_collect.innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
+          option_linked=document.querySelectorAll('.test-text');
+          option_image=document.querySelectorAll('p img');
+          console.log(option_linked[0]);
           for(let k=0; k<option_linked.length; k++){
             console.log(option_active.textContent);
-            console.log(option_linked[k].textContent);
-            if(option_active.textContent === option_linked[k].textContent){
-              for(let j=0;j<usedImage.length;j++){ //j<usedImage.length
-                //console.log(usedImage[j]);
-                //console.log(image_rand);
+            console.log(option_image[k].className);
+            if(option_active.textContent === option_image[k].className){
+              for(let j=0;j<usedImage.length;j++){ 
+                console.log(usedImage[j]);
+                console.log(image_rand);
                 if (usedImage[j] == image_rand){
                   add_image_to_list=0;
                   image_alert=1;
@@ -135,7 +124,7 @@ add_image.addEventListener('click',()=>{
                 }
         
                   
-                }
+              }
             }
             else{
                 add_image_to_list +=1;
@@ -143,8 +132,8 @@ add_image.addEventListener('click',()=>{
           }
           if (add_image_to_list >=1){
             usedImage.push(image_rand);
-            email_collect.innerHTML +=`<p class="test-text"><span>${option_active.textContent}</span><img class="email-${option_active.textContent}" src=${image_rand}></p>`;
-            console.log(email_collect.textContent);
+            email_collect.innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
+            console.log(email_collect.textContent);//<span>${option_active.textContent}</span>
             add_image_to_list =0;
           }
           else if (image_alert==1){
@@ -250,7 +239,25 @@ collection_deleter_all.addEventListener('click',()=>{
   }
 });
 
-
+function swapCollection(){
+  //alert('state change detected');
+  option_active = document.querySelector('option:checked');
+  $(`${email1}`).css('display','none');
+  if (readyForLinking > 0){
+    option_linked=document.querySelectorAll('.test-text'); 
+    option_image=document.querySelectorAll('p img');
+    for (let i=0; i<option_linked.length; i++){
+        console.log(option_image[i].className);
+        if (option_active.textContent === option_image[i].className){
+          option_linked[i].style.display ='block';
+        }
+        else{
+          option_linked[i].style.display ='none';
+        }
+      }
+     
+    }
+  }
 
 
 
