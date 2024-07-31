@@ -9,6 +9,7 @@ let readyForLinking =0; //Prevents an error created when switching collections b
 let add_email_to_list =0;
 let add_image_to_list =0;
 let image_alert =0;
+let override =0;
 option_active = document.querySelector('option:checked'); //Keeps track of the current selected option
 option_linked=document.querySelectorAll('.test-text'); 
 function validateForm(){
@@ -18,9 +19,9 @@ function validateForm(){
     let test1= regex.test(email1); //Checks if the email entered follows one of the regular expressions specified above
                                    //If it does, test1 will be assigned to true. If not, it will be assigned to false
     function addEmail(){
-      quantity_email+=1;
       console.log(usedEmailAddress.length);
       if (usedEmailAddress.length == 0){
+        quantity_email+=1;
         usedEmailAddress.push(email1);
         console.log(usedEmailAddress);
         select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
@@ -31,7 +32,6 @@ function validateForm(){
           if (usedEmailAddress[i] == email1){
               alert('You have already added this email as a collection');
               add_email_to_list =0;
-              quantity_email-=1;
               break;
           }
           else{
@@ -39,10 +39,12 @@ function validateForm(){
           }
         }
         if (add_email_to_list >=1){
+          quantity_email+=1;
           usedEmailAddress.push(email1);
           select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
           collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; 
           add_email_to_list =0;
+
         }
       }
       
@@ -91,7 +93,7 @@ add_image.addEventListener('click',()=>{
         readyForLinking+=1;
       }
       else{
-        alert('Image already exists in this collection');
+        alert('A collection has not been selected yet');
       }       
     }
     else{
@@ -110,26 +112,37 @@ add_image.addEventListener('click',()=>{
           for(let k=0; k<option_linked.length; k++){
             console.log(option_active.textContent);
             console.log(option_image[k].className);
-            if(option_active.textContent === option_image[k].className){
+            if(option_active.textContent === option_image[k].className){ //Checks if image belongs to the option active select
               for(let j=0;j<usedImage.length;j++){ 
-                console.log(usedImage[j]);
-                console.log(image_rand);
+                // console.log(usedImage[j]);
+                // console.log(image_rand);
                 if (usedImage[j] == image_rand){
                   add_image_to_list=0;
                   image_alert=1;
-                    
+                  alert('Doesnt add a new image');
+                  override = 1;
+                  break;  
+                  
                 }
                 else{
                     add_image_to_list +=1;
+                    alert('Adds a new image!');
                 }
         
                   
               }
             }
             else{
+              if (override != 1){
+                alert('Will add image');
                 add_image_to_list +=1;
+              }
+              else{
+                alert('Override! Image already in collection');
+              }
             }
           }
+          alert(`add image to list value: ${add_image_to_list}`);
           if (add_image_to_list >=1){
             usedImage.push(image_rand);
             email_collect.innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
@@ -140,6 +153,8 @@ add_image.addEventListener('click',()=>{
             alert('Image already exists in this collection');
           }
         }
+        alert(`Loop time ${m} finished`);
+    
         // option_linked=document.querySelectorAll('.test-text'); 
         // for(let k=0; k<option_linked.length; k++){
         //   console.log(option_active.textContent);
@@ -203,7 +218,7 @@ add_image.addEventListener('click',()=>{
       //   alert('Image already exists in this collection');
       // } */
     }
-    
+ 
     
 
     }
@@ -214,12 +229,22 @@ add_image.addEventListener('click',()=>{
 });
 
 let collection_deleter_one = document.querySelector('#delete-one');
-  collection_deleter_one.addEventListener('click',()=>{ 
-    if (option_active.textContent !== "Select"){
-      usedEmailAddress.pop(option_active.textContent); 
-      option_active.remove();//Removes the current option from the select menu and changes to default option
-      $('p').css('display','none'); //Hides all images inside <p> tags until another collection is selected
-      quantity_email-=1;//<p> are targeted instead of <img> to prevent the hiding of the image in the top box
+collection_deleter_one.addEventListener('click',()=>{ 
+  if (option_active.textContent !== "Select"){
+    alert('Made it here');
+    alert(`${select.length}`);
+    for(o=1;o<select.length;o+=1){
+      email_collect=document.querySelectorAll(`#div-${o}`);
+      console.log(option_active.textContent);
+      console.log(email_collect.textContent);
+      if(option_active.textContent === email_collect.textContent){
+          usedEmailAddress.pop(option_active.textContent); 
+          option_active.remove();//Removes the current option from the select menu and changes to default option
+          console
+          email_collect.remove();
+          quantity_email-=1;
+        }
+      }
     }                              
     else{ //You are not allowed to delete the default "Select" option, so you will be shown this message if you try to delete it
       alert('Please select the collection you would like to delete');
@@ -290,5 +315,5 @@ Consistent and professional looking colour scheme
 Smaller Pictures
 Input text clear 
 Fix delete button issue where you can add to a deleted collection
-Fix image validation issues
+Fix image validation issues/ Bug Which adds images to the wrong collections midway through the code
 */
