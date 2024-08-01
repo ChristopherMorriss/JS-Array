@@ -9,7 +9,9 @@ let collectionGroup =[];
 let readyForLinking =0; //Prevents an error created when switching collections before adding an image to the page
 let add_email_to_list =0;
 let add_image_to_list =0;
+let add_collection_to_list =0;
 let image_alert =0;
+let override =0;
 option_active = document.querySelector('option:checked'); //Keeps track of the current selected option
 option_linked=document.querySelectorAll('.test-text'); 
 function validateForm(){
@@ -24,6 +26,7 @@ function validateForm(){
         usedEmailAddress.push(email1);
         select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
         collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`;
+        alert('Email address validated');
       }
       else{
         for(i=0;i<usedEmailAddress.length;i++){ 
@@ -34,7 +37,6 @@ function validateForm(){
           }
           else{
             add_email_to_list +=1;
-            alert('Email address validated'); //Alert added here instead of where the validation occurs to prevent user confusion
           }
         }
         if (add_email_to_list >=1){
@@ -44,6 +46,44 @@ function validateForm(){
           collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; 
           //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
           add_email_to_list =0; 
+          alert('Email address validated'); //Alert added here instead of where the validation occurs to prevent user confusion
+          //email_collect2 does the same thing as email_collect but written in a different way for a different purpose
+          let email_collect2= document.querySelectorAll("[id^='div-']"); 
+          console.log(email_collect2.length);
+          for (p=0; p<email_collect2.length; p++){
+            alert(`collection add number: ${add_collection_to_list}`);
+            if (collectionGroup.length === 0){
+              console.log(email_collect2[p]);
+              collectionGroup.push(email_collect2[p]);
+              console.log(collectionGroup);
+              console.log(collectionGroup[0]);
+            }
+            else{
+              add_collection_to_list =1;
+              console.log(p);
+              console.log(collectionGroup.length);
+              if (collectionGroup.length !=(p)){ //Removes the collection divs previously created to prevent issues with duplicates
+                collectionGroup=[];
+              }
+              
+              
+
+            }
+        
+  
+            alert(`collection add number: ${add_collection_to_list}`);
+            if (add_collection_to_list == 1){
+              if (override != 1){
+                collectionGroup.push(email_collect2[p]);
+                console.log(collectionGroup);
+                add_collection_to_list=0;
+              }
+              else{
+                override=0;
+              }
+            }
+          }
+          
 
         }
       }
@@ -119,10 +159,6 @@ add_image.addEventListener('click',()=>{
           if (add_image_to_list >=1){
             usedImage.push(image_rand);
             email_collect.innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
-            for (p=0;p<email_collect.length;p++){
-              collectionGroup.push(email_collect[p]);
-              alert(collectionGroup);
-            }
             console.log(email_collect.textContent);
             add_image_to_list =0;
           }
@@ -145,15 +181,21 @@ let collection_deleter_one = document.querySelector('#delete-one');
 collection_deleter_one.addEventListener('click',()=>{ 
   if (option_active.textContent !== "Select"){
     for(o=1;o<select.length;o+=1){
-      let email_collect=document.querySelector(`#div-${o}`);
-      console.log(option_active.textContent);
-      console.log(email_collect.textContent);
-      if(option_active.textContent === email_collect.textContent){
-          usedEmailAddress.pop(option_active.textContent); 
-          option_active.remove();//Removes the current option from the select menu and changes to default option
-          email_collect.remove();
-          quantity_email-=1;
-        }
+      if (option_active.textContent == email_collect2[o].textContent){ 
+        //if (collectionGroup[o].textContent)
+        usedEmailAddress.pop(option_active.textContent); 
+        option_active.remove();//Removes the current option from the select menu and changes to default option
+        quantity_email-=1;
+      }
+      // let email_collect=document.querySelector(`#div-${o}`);
+      // console.log(option_active.textContent);
+      // console.log(email_collect.textContent);
+      // if(option_active.textContent === email_collect.textContent){
+      //     usedEmailAddress.pop(option_active.textContent); 
+      //     option_active.remove();//Removes the current option from the select menu and changes to default option
+      //     email_collect.remove();
+      //     quantity_email-=1;
+      //   }
       }
     }                              
     else{ //You are not allowed to delete the default "Select" option, so you will be shown this message if you try to delete it
