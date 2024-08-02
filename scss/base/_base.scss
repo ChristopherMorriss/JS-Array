@@ -20,7 +20,7 @@ small{
 }
 
 span{
-    display: none;
+    display: none; //Prevents the text used for comparisons from being displayed
 }
 
 html{
@@ -33,10 +33,4 @@ header{
     font-size: 26px;
 }
 
-p{
-    img{
-        max-height: 30%;
-    }
-    
-}
 

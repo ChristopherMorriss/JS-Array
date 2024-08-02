@@ -17,7 +17,7 @@
                   $flex-justify: space-between
                 );
     margin-top:10px;
-    width:100%;
+    width:100%; //Width: 500px is too big for the smallest viewport 
     @include media(small){
         width:500px; //Keeps the buttons inline with the image above it
     }
