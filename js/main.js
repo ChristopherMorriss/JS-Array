@@ -51,7 +51,7 @@ function validateForm(){
           let email_collect2= document.querySelectorAll("[id^='div-']"); 
           console.log(email_collect2.length);
           for (p=0; p<email_collect2.length; p++){
-            alert(`collection add number: ${add_collection_to_list}`);
+            //alert(`collection add number: ${add_collection_to_list}`);
             if (collectionGroup.length === 0){
               console.log(email_collect2[p]);
               collectionGroup.push(email_collect2[p]);
@@ -71,7 +71,7 @@ function validateForm(){
             }
         
   
-            alert(`collection add number: ${add_collection_to_list}`);
+            //alert(`collection add number: ${add_collection_to_list}`);
             if (add_collection_to_list == 1){
               if (override != 1){
                 collectionGroup.push(email_collect2[p]);
@@ -179,23 +179,30 @@ add_image.addEventListener('click',()=>{
 
 let collection_deleter_one = document.querySelector('#delete-one');
 collection_deleter_one.addEventListener('click',()=>{ 
+  console.log(option_active.textContent);
   if (option_active.textContent !== "Select"){
-    for(o=1;o<select.length;o+=1){
-      if (option_active.textContent == email_collect2[o].textContent){ 
-        //if (collectionGroup[o].textContent)
-        usedEmailAddress.pop(option_active.textContent); 
-        option_active.remove();//Removes the current option from the select menu and changes to default option
-        quantity_email-=1;
-      }
-      // let email_collect=document.querySelector(`#div-${o}`);
-      // console.log(option_active.textContent);
-      // console.log(email_collect.textContent);
-      // if(option_active.textContent === email_collect.textContent){
-      //     usedEmailAddress.pop(option_active.textContent); 
-      //     option_active.remove();//Removes the current option from the select menu and changes to default option
-      //     email_collect.remove();
-      //     quantity_email-=1;
-      //   }
+    for(o=0;o<collectionGroup.length;o+=1){ //select.length
+      console.log(collectionGroup.length);
+      console.log(collectionGroup[o].textContent);
+      if (option_active.textContent == collectionGroup[o].textContent){ 
+        let email_collect2= document.querySelectorAll("[id^='div-']"); 
+        for (r=0;r<email_collect2.length;r+=1){
+          console.log(email_collect2.length);
+          console.log(email_collect2[r].textContent);
+          if (collectionGroup[o].textContent == email_collect2[r].textContent){
+            usedEmailAddress.pop(option_active.textContent); 
+            option_active.remove();//Removes the current option from the select menu and changes to default option
+            delete collectionGroup[o];
+            email_collect2[r].remove();
+            console.log(collectionGroup);
+            quantity_email-=1;
+            collectionGroup= collectionGroup.filter(n=>n); //Removes the empty elements which appear after removing an array item
+            console.log(collectionGroup);
+            console.log(collectionGroup.length);
+
+          }
+        }
+       }
       }
     }                              
     else{ //You are not allowed to delete the default "Select" option, so you will be shown this message if you try to delete it
