@@ -69,8 +69,15 @@ function validateForm(){
                 console.log(`not_same:${not_same}`);
                 console.log(`email_collect2.length:${email_collect2.length}`);
                 if (not_same == email_collect2.length){
+                  console.log(email_collect2);
+                  console.log(email_collect2[u]);
+                  email_collect2[u].remove(); //Remove the option (but doesn't remove it from the collect list if not redefined below)
+                  console.log(email_collect2);
+                  console.log(collectionGroup);
                   collection_pictures.innerHTML += `<div id="div-${t}"><span>${email1}</span></div>`;
-                  added =1;
+                  email_collect2= document.querySelectorAll("[id^='div-']"); //Redifined otherwise it ignores the above div
+                  console.log(email_collect2);
+                  console.log(email_collect2[u]); //Shows the removed value?!
                   console.log('Added old div number');
                   break;
                 }
@@ -209,7 +216,7 @@ collection_deleter_one.addEventListener('click',()=>{
             console.log()
             option_active.remove(); //Removes the current option from the select menu and changes to default option
             delete collectionGroup[o]; 
-            email_collect2[r].remove(); //Appears to delete target and items behind target for some reason
+            email_collect2[r].remove(); 
             quantity_email-=1; 
             collectionGroup= collectionGroup.filter(n=>n); //Removes the empty elements which appear after removing an array item
             console.log(collectionGroup);
