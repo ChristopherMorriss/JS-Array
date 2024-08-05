@@ -12,7 +12,6 @@ let add_collection_to_list =0;
 let image_alert =0;
 let override =0;
 let not_same =0;
-let added =0;
 option_active = document.querySelector('option:checked'); //Keeps track of the current selected option
 option_linked=document.querySelectorAll('.test-text');
 
@@ -69,10 +68,17 @@ function validateForm(){
                 not_same+=1;
                 console.log(`not_same:${not_same}`);
                 console.log(`email_collect2.length:${email_collect2.length}`);
-                console.log(added);
+                if (not_same == email_collect2.length){
+                  collection_pictures.innerHTML += `<div id="div-${t}"><span>${email1}</span></div>`;
+                  added =1;
+                  console.log('Added old div number');
+                  break;
+                }
               }
+              
             }
           }
+  
           add_email_to_list =0; 
           alert('Email address validated'); //Alert added here instead of where the validation occurs because duplicates are not valid
           //email_collect2 does the same thing as email_collect but written in a different way for a different purpose
@@ -200,11 +206,13 @@ collection_deleter_one.addEventListener('click',()=>{
             delete usedEmailAddress[r]; 
             usedEmailAddress=usedEmailAddress.filter(n=>n);
             console.log(usedEmailAddress);
+            console.log()
             option_active.remove(); //Removes the current option from the select menu and changes to default option
             delete collectionGroup[o]; 
             email_collect2[r].remove(); //Appears to delete target and items behind target for some reason
             quantity_email-=1; 
             collectionGroup= collectionGroup.filter(n=>n); //Removes the empty elements which appear after removing an array item
+            console.log(collectionGroup);
             changeSelect(); 
             break; //Ends the loop, preventing the deletion of the collections that come after the deleted option
 
