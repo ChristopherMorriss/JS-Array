@@ -11,6 +11,8 @@ let add_image_to_list =0;
 let add_collection_to_list =0;
 let image_alert =0;
 let override =0;
+let not_same =0;
+let added =0;
 option_active = document.querySelector('option:checked'); //Keeps track of the current selected option
 option_linked=document.querySelectorAll('.test-text');
 
@@ -52,14 +54,54 @@ function validateForm(){
         if (add_email_to_list >=1){
           quantity_email+=1;
           usedEmailAddress.push(email1);
-          select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
-          collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; 
+          let email_collect2= document.querySelectorAll("[id^='div-']"); 
+          for(u=0;u<email_collect2.length;u+=1){
+            console.log(quantity_email);
+            console.log(email_collect2.length);
+            not_same=0;
+            for(t=0;t<quantity_email;t+=1){
+              console.log(email_collect2[u].id);
+              console.log(`div-${t+1}`);
+              if (email_collect2[u].id !== `div-${t+1}`){ //If the div-t doesn't belong to any collection, this will add it to one
+                not_same+=1;
+                console.log(`not_same:${not_same}`);
+                console.log(`email_collect2.length:${email_collect2.length}`);
+                if (not_same == quantity_email){
+                  select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
+                  collection_pictures.innerHTML += `<div id="div-${t}"><span>${email1}</span></div>`;
+                  added +=1;
+                  break;
+                  
+                }
+
+              }
+              else{
+
+              }
+          
+            }
+          
+          }
+          console.log(not_same);
+          console.log(quantity_email);
+          console.log(email_collect2.length);
+          if(added ==1){
+            added=0;
+          }
+          else{
+            select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
+            collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; 
+          }
+          
+          
+          //select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
+          //collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; 
           //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
           add_email_to_list =0; 
           alert('Email address validated'); //Alert added here instead of where the validation occurs because duplicates are not valid
           //email_collect2 does the same thing as email_collect but written in a different way for a different purpose
           changeSelect();
-          let email_collect2= document.querySelectorAll("[id^='div-']"); 
+          //let email_collect2= document.querySelectorAll("[id^='div-']"); 
           for (p=0; p<email_collect2.length; p++){
             if (collectionGroup.length === 0){
               collectionGroup.push(email_collect2[p]);
@@ -173,11 +215,14 @@ let collection_deleter_one = document.querySelector('#delete-one');
 collection_deleter_one.addEventListener('click',()=>{ 
   if (option_active.textContent !== "Select"){
     for(o=0;o<collectionGroup.length;o+=1){ //select.length
+      console.log(option_active);
       if (option_active.textContent == collectionGroup[o].textContent){ 
         let email_collect2= document.querySelectorAll("[id^='div-']"); 
         for (r=0;r<email_collect2.length;r+=1){
           if (collectionGroup[o].textContent == email_collect2[r].textContent){ 
-            usedEmailAddress.pop(option_active.textContent); 
+            delete usedEmailAddress[r]; 
+            usedEmailAddress=usedEmailAddress.filter(n=>n);
+            console.log(usedEmailAddress);
             option_active.remove(); //Removes the current option from the select menu and changes to default option
             delete collectionGroup[o]; 
             email_collect2[r].remove(); //Appears to delete target and items behind target for some reason
