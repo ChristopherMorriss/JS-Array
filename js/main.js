@@ -10,7 +10,6 @@ let add_email_to_list =0;
 let add_image_to_list =0;
 let add_collection_to_list =0;
 let image_alert =0;
-let override =0;
 let not_same =0;
 option_active = document.querySelector('option:checked'); //Keeps track of the current selected option
 option_linked=document.querySelectorAll('.test-text');
@@ -37,6 +36,9 @@ function validateForm(){
         usedEmailAddress.push(email1);
         select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; //Creates a new option for the select menu
         collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; //Creates a new collection
+        let email_collect = document.querySelectorAll("[id^='div-']");
+        collectionGroup.push(email_collect[0]);
+        console.log(collectionGroup);
         alert('Email address validated'); 
       }
       else{
@@ -131,7 +133,7 @@ function validateForm(){
         addEmail(); //Adds the email only when the email is valid
       }
       else {
-        alert('Invalid email.Please enter the email address in the correct format (example:test@test.com)');
+        alert('Invalid email. Please enter the email address in the correct format (example: test@test.com)');
       }
     }
     
@@ -213,9 +215,11 @@ let collection_deleter_one = document.querySelector('#delete-one');
 collection_deleter_one.addEventListener('click',()=>{ 
   if (option_active.textContent !== "Select"){
     for(o=0;o<collectionGroup.length;o+=1){ //select.length
+      console.log(collectionGroup);
       if (option_active.textContent == collectionGroup[o].textContent){ 
         let email_collect= document.querySelectorAll("[id^='div-']"); 
         for (r=0;r<email_collect.length;r+=1){
+          console.log(email_collect.length);
           if (collectionGroup[o].textContent == email_collect[r].textContent){ 
             delete usedEmailAddress[r]; 
             usedEmailAddress=usedEmailAddress.filter(n=>n);
@@ -285,6 +289,6 @@ newImage(); //Generates a new image which replaces the seeded image
 
 
 /*Tasks Remaining:
-Force collection quantity email numbers to unique for deleted divs
+Fix delete one issue when there is only one collection
 Add comments to code
 */
