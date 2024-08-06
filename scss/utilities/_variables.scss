@@ -2,12 +2,12 @@
 
 $btn-colour: white;
 $black: black;
-$green: lime;
+$green: rgb(5, 174, 22);
 $opacity-green: rgb(0, 38, 0);
 $orange: orange;
 $opacity-orange: rgb(116, 76, 1);
 $red: red;
-$opacity-red: rgb(117, 1, 1);
+$opacity-red: rgb(57, 1, 1);
 
 //Breakpoints
 $sm:559px; //559px instead of 578px to prevent an odd layout for the .flex-btn buttons between 559px and 578px

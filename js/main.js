@@ -56,28 +56,28 @@ function validateForm(){
           select.innerHTML += `<option id="${email1}" value="${email1}">${email1}</option>`; 
           collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; 
           //Directly adds the new HTML code to the first select tag (there is only one which is used for choosing the selection)
-          let email_collect2= document.querySelectorAll("[id^='div-']"); 
+          let email_collect= document.querySelectorAll("[id^='div-']"); 
           for(t=1;t<quantity_email;t+=1){
             console.log(quantity_email);
-            console.log(email_collect2.length);
+            console.log(email_collect.length);
             not_same=0;
-            for(u=0;u<email_collect2.length;u+=1){
-              console.log(email_collect2[u].id);
+            for(u=0;u<email_collect.length;u+=1){
+              console.log(email_collect[u].id);
               console.log(`div-${t}`);
-              if (email_collect2[u].id !== `div-${t}`){
+              if (email_collect[u].id !== `div-${t}`){
                 not_same+=1;
                 console.log(`not_same:${not_same}`);
-                console.log(`email_collect2.length:${email_collect2.length}`);
-                if (not_same == email_collect2.length){
-                  console.log(email_collect2);
-                  console.log(email_collect2[u]);
-                  email_collect2[u].remove(); //Remove the option (but doesn't remove it from the collect list if not redefined below)
-                  console.log(email_collect2);
+                console.log(`email_collect.length:${email_collect.length}`);
+                if (not_same == email_collect.length){
+                  console.log(email_collect);
+                  console.log(email_collect[u]);
+                  email_collect[u].remove(); //Remove the option (but doesn't remove it from the collect list if not redefined below)
+                  console.log(email_collect);
                   console.log(collectionGroup);
                   collection_pictures.innerHTML += `<div id="div-${t}"><span>${email1}</span></div>`;
-                  email_collect2= document.querySelectorAll("[id^='div-']"); //Redifined otherwise it ignores the above div
-                  console.log(email_collect2);
-                  console.log(email_collect2[u]); //Shows the removed value?!
+                  email_collect= document.querySelectorAll("[id^='div-']"); //Redifined otherwise it ignores the above div
+                  console.log(email_collect);
+                  console.log(email_collect[u]); 
                   console.log('Added old div number');
                   break;
                 }
@@ -88,13 +88,13 @@ function validateForm(){
   
           add_email_to_list =0; 
           alert('Email address validated'); //Alert added here instead of where the validation occurs because duplicates are not valid
-          //email_collect2 does the same thing as email_collect but written in a different way for a different purpose
+          //email_collect does the same thing as email_collect but written in a different way for a different purpose
           changeSelect();
-          //let email_collect2= document.querySelectorAll("[id^='div-']"); 
-          console.log(email_collect2.length);
-          for (p=0; p<email_collect2.length; p++){
+          //let email_collect= document.querySelectorAll("[id^='div-']"); 
+          console.log(email_collect.length);
+          for (p=0; p<email_collect.length; p++){
             if (collectionGroup.length === 0){
-              collectionGroup.push(email_collect2[p]);
+              collectionGroup.push(email_collect[p]);
             }
             else{
               add_collection_to_list =1;
@@ -108,7 +108,7 @@ function validateForm(){
         
             
             if (add_collection_to_list == 1){
-              collectionGroup.push(email_collect2[p]);
+              collectionGroup.push(email_collect[p]);
               console.log(collectionGroup);
               add_collection_to_list=0;
               
@@ -148,25 +148,31 @@ function newImage(){
 }
 
 add_image.addEventListener('click',()=>{
-  let email_collect= document.querySelector(`#div-${quantity_email}`);
+  let email_collect= document.querySelectorAll(("[id^='div-']"));
   if (option_active.textContent !== "Select"){ 
     if (usedImage.length == 0){
-      if (option_active.textContent !== "Select"){ 
-        usedImage.push(image_rand);
-        email_collect.innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
-        readyForLinking+=1;
+      for (m=1;m<select.length;m+=1){
+        if (option_active.textContent === email_collect[m-1].textContent){ 
+          usedImage.push(image_rand);
+          email_collect[m-1].innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
+          readyForLinking+=1;
       }
-      else{
-        alert('A collection has not been selected yet');
-      }       
+    }  
     }
     else{
       for(m=1;m<select.length;m+=1){
-        let email_collect= document.querySelector(`#div-${m}`); 
-        if(option_active.textContent === email_collect.textContent){ //Assigns the image to the div linked with the email address
+        //let email_collect= document.querySelector(`#div-${m}`); 
+        let email_collect= document.querySelectorAll(("[id^='div-']"));
+        console.log(email_collect);
+        console.log(email_collect[m-1]);
+        console.log(email_collect[m-1].textContent);
+        console.log(option_active.textContent);
+        if(option_active.textContent === email_collect[m-1].textContent){ //Assigns the image to the div linked with the email address
           option_linked=document.querySelectorAll('.test-text');
           option_image=document.querySelectorAll('p img');
           for(let k=0; k<option_linked.length; k++){
+            console.log(option_active.textContent);
+            console.log(option_image[k].className);
             if(option_active.textContent === option_image[k].className){ //Checks if image belongs to the option active select
               if(option_image[k].src== image_rand){ //Checks if it is already exists
                 image_alert=1;
@@ -181,10 +187,11 @@ add_image.addEventListener('click',()=>{
               add_image_to_list=1; 
             }
           }
-          
+          console.log(add_image_to_list);
           if (add_image_to_list >=1){
             usedImage.push(image_rand);
-            email_collect.innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
+            console.log(email_collect[m-1]);
+            email_collect[m-1].innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
             add_image_to_list =0;
           }
           else if (image_alert==1){
@@ -207,16 +214,16 @@ collection_deleter_one.addEventListener('click',()=>{
   if (option_active.textContent !== "Select"){
     for(o=0;o<collectionGroup.length;o+=1){ //select.length
       if (option_active.textContent == collectionGroup[o].textContent){ 
-        let email_collect2= document.querySelectorAll("[id^='div-']"); 
-        for (r=0;r<email_collect2.length;r+=1){
-          if (collectionGroup[o].textContent == email_collect2[r].textContent){ 
+        let email_collect= document.querySelectorAll("[id^='div-']"); 
+        for (r=0;r<email_collect.length;r+=1){
+          if (collectionGroup[o].textContent == email_collect[r].textContent){ 
             delete usedEmailAddress[r]; 
             usedEmailAddress=usedEmailAddress.filter(n=>n);
             console.log(usedEmailAddress);
             console.log()
             option_active.remove(); //Removes the current option from the select menu and changes to default option
             delete collectionGroup[o]; 
-            email_collect2[r].remove(); 
+            email_collect[r].remove(); 
             quantity_email-=1; 
             collectionGroup= collectionGroup.filter(n=>n); //Removes the empty elements which appear after removing an array item
             console.log(collectionGroup);
@@ -241,9 +248,9 @@ collection_deleter_all.addEventListener('click',()=>{
   usedImage = []; 
   usedEmailAddress =[];
   collectionGroup= [];
-  let email_collect2= document.querySelectorAll("[id^='div-']"); 
-  for (s=0;s<email_collect2.length;s+=1){
-    email_collect2[s].remove(); //Removes each collection
+  let email_collect= document.querySelectorAll("[id^='div-']"); 
+  for (s=0;s<email_collect.length;s+=1){
+    email_collect[s].remove(); //Removes each collection
   }
   quantity_email=0; //Resets the email quantity to 0 
   changeSelect();

@@ -33,10 +33,6 @@ header {
   font-size: 26px;
 }
 
-p img {
-  max-height: 30%;
-}
-
 @font-face {
   font-family: "open sans";
   src: url("../fonts/OpenSans-VariableFont_wdth,wght.ttf") format("truetype");
@@ -92,7 +88,7 @@ p img {
 }
 
 .green-btn {
-  background-color: lime;
+  background-color: rgb(5, 174, 22);
 }
 .green-btn:hover {
   background-color: rgb(0, 38, 0);
@@ -109,7 +105,7 @@ p img {
   background-color: red;
 }
 .red-btn:hover {
-  background-color: rgb(117, 1, 1);
+  background-color: rgb(57, 1, 1);
 }
 
 .flex-btn {
