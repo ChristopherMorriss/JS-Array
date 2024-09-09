@@ -109,16 +109,21 @@ function validateForm(){
     }
     
     if (email1=== ''){
-      //$('#required-email').css('display','block'); //Code for the red text warning message, currently disabled
-      alert('Please enter your email address: this is required.');
-      
+      $('#required-email').css('display','block'); //Code for the red text warning message, currently disabled
+      // $('#valid-email').css('margin-bottom','5px');
+      $('#invalid-email').css('display','none');
+      //alert('Please enter your email address: this is required.');
     }
     else{
+      $('#required-email').css('display','none');
+      // $('#valid-email').css('margin-bottom','0px');
+      $('#invalid-email').css('display','none');
       if (test1 === true){
         addEmail(); //Adds the email only when the email is valid
       }
       else {
-        alert('Invalid email. Please enter the email address in the correct format (example: test@test.com)');
+        $('#invalid-email').css('display','block');
+        //alert('Invalid email. Please enter the email address in the correct format (example: test@test.com)');
       }
     }
     
@@ -253,7 +258,10 @@ function swapCollection(){ //When the select option is changed, this code is exe
 
 newImage(); //Generates a new image which replaces the seeded image
 
-
+//Feedback tasks to action:
+//Professional styling
+//Create a styled error message instead of using an alert
+//Allows the images to display in a row for iPad+ viewports
 
 
 

@@ -26,7 +26,10 @@
                 <div class="img-collection container">
                     <label for="email">Email:</label> 
                     <input type="text" id="email" class="form-object" placeholder="Email Address*">
-                    <small id="required-email">Please enter a valid email</small>
+                    <div class="error-box" id="valid-email">
+                        <small id="required-email">Please enter an email address: this is required</small>
+                        <small id="invalid-email">Please enter a valid email address</small>
+                    </div>
                     <button class="green-btn form-object" id="submit" onclick="validateForm()">New Collection</button>
                     <hr>
                     <label for="select">Collection:</label>

@@ -15,7 +15,7 @@ img {
 }
 
 small {
-  color: red;
+  color: white;
   display: none;
 }
 
@@ -77,12 +77,19 @@ header {
   width: 75%;
 }
 
+.error-box {
+  padding: 5px;
+  font-weight: bold;
+  background-color: red;
+  width: calc(75% + 49px);
+}
+
 .container {
   margin-left: 5%;
   margin-right: 5%;
 }
 
-.red-btn, #email, #select {
+.red-btn, #email, #select, .error-box {
   margin-top: 5px;
   margin-bottom: 5px;
 }
