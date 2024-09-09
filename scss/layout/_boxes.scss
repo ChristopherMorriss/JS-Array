@@ -45,4 +45,18 @@
   font-weight: bold;
   background-color: $red;
   width: calc(75% + 49px);
+  display:none;
+}
+
+.error-box#collection-delete-check{
+  width: 100%;
+}
+
+.success-box{
+  @extend %vertical_margin;
+  padding:5px;
+  font-weight: bold;
+  background-color: $green;
+  width: calc(75% + 49px);
+  display:none;
 }

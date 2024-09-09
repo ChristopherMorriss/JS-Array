@@ -26,20 +26,22 @@
                 <div class="img-collection container">
                     <label for="email">Email:</label> 
                     <input type="text" id="email" class="form-object" placeholder="Email Address*">
-                    <div class="error-box" id="valid-email">
-                        <small id="required-email">Please enter an email address: this is required</small>
-                        <small id="invalid-email">Please enter a valid email address</small>
-                    </div>
+                    <small class="error-box" id="required-email">Please enter an email address: this is required</small>
+                    <small class="error-box" id="invalid-email">Please enter a valid email address</small>
+                    <small class="success-box" id="valid-email">Email address validated</small>
+                    <small class="error-box" id="duplicate-email">You have already added this email as a collection</small>
                     <button class="green-btn form-object" id="submit" onclick="validateForm()">New Collection</button>
                     <hr>
                     <label for="select">Collection:</label>
                     <select name="select" id="select" onchange="swapCollection()">
                         <option value="1">Select</option>
                     </select>
+                    <small class="error-box" id="no-collection">A collection has not been selected yet</small>
                     <div class="delete-btns">
                         <button class="red-btn" id="delete-one">Remove This Collection</button>
                         <button class="red-btn" id="delete-all">Remove All Collections</button>
                     </div>
+                    <small class="error-box" id="collection-to-delete">Please select a collection to delete</small>
                     <div class="collection-pictures">
                     <!-- Dynamically created elements go here -->
                     </div>

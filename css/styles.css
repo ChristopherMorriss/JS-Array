@@ -16,7 +16,6 @@ img {
 
 small {
   color: white;
-  display: none;
 }
 
 span {
@@ -82,6 +81,19 @@ header {
   font-weight: bold;
   background-color: red;
   width: calc(75% + 49px);
+  display: none;
+}
+
+.error-box#collection-delete-check {
+  width: 100%;
+}
+
+.success-box {
+  padding: 5px;
+  font-weight: bold;
+  background-color: rgb(5, 174, 22);
+  width: calc(75% + 49px);
+  display: none;
 }
 
 .container {
@@ -89,7 +101,7 @@ header {
   margin-right: 5%;
 }
 
-.red-btn, #email, #select, .error-box {
+.red-btn, #email, #select, .error-box, .success-box {
   margin-top: 5px;
   margin-bottom: 5px;
 }

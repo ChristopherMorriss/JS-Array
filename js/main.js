@@ -38,12 +38,16 @@ function validateForm(){
         collection_pictures.innerHTML += `<div id="div-${quantity_email}"><span>${email1}</span></div>`; //Creates a new collection
         let email_collect = document.querySelectorAll("[id^='div-']");
         collectionGroup.push(email_collect[0]);
-        alert('Email address validated'); 
+        $('#valid-email').css('display','block');
+        $('#duplicate-email').css('display','none');
+        //alert('Email address validated'); 
       }
       else{
         for(i=0;i<usedEmailAddress.length;i++){ 
           if (usedEmailAddress[i] == email1){ //Checks if the input is already in the list
-              alert('You have already added this email as a collection');
+              //alert('You have already added this email as a collection');
+              $('#duplicate-email').css('display','block');
+              $('#valid-email').css('display','none');
               add_email_to_list =0;
               break;
           }
@@ -188,7 +192,8 @@ add_image.addEventListener('click',()=>{
     }
   }
   else{ //If you haven't selected a collection (the contents of the button are the default Select), this message will show
-    alert('A collection has not been selected yet');
+    $('#no-collection').css('display','block');
+    //alert('A collection has not been selected yet');
   }
 });
 
@@ -216,7 +221,8 @@ collection_deleter_one.addEventListener('click',()=>{
       }
     }                              
     else{ //You are not allowed to delete the default "Select" option, so you will be shown this message if you try to delete it
-      alert('Please select the collection you would like to delete');
+      //alert('Please select the collection you would like to delete');
+      $('#collection-to-delete').css('display','block');
     }
 });
 
@@ -228,6 +234,10 @@ collection_deleter_all.addEventListener('click',()=>{
   usedImage = []; 
   usedEmailAddress =[];
   collectionGroup= [];
+  $('#no-collection').css('display','none');
+  $('#collection-to-delete').css('display','none');
+  $('#valid-email').css('display','none');
+  $('#duplicate-email').css('display','none');
   let email_collect= document.querySelectorAll("[id^='div-']"); 
   for (s=0;s<email_collect.length;s+=1){
     email_collect[s].remove(); //Removes each collection
@@ -252,6 +262,12 @@ function swapCollection(){ //When the select option is changed, this code is exe
       }
      
     }
+  if (option_active.textContent !== "Select"){
+    $('#no-collection').css('display','none');
+    $('#collection-to-delete').css('display','none');
+    $('#valid-email').css('display','none');
+    $('#duplicate-email').css('display','none');
+  }
   }
 
 
