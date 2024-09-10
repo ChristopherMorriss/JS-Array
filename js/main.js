@@ -3,14 +3,14 @@ let email1 = $('#email').val();
 let collection_pictures=document.querySelector('.collection-pictures'); //The location which is used to store the collections
 let select = document.querySelector('#select');
 let usedEmailAddress = [];
-let usedImage =[];
-let collectionGroup =[];
-let readyForLinking =0; //Prevents an error created when switching collections before adding an image to the page
-let add_email_to_list =0;
-let add_image_to_list =0;
-let add_collection_to_list =0;
-let image_alert =0;
-let not_same =0;
+let usedImage = [];
+let collectionGroup = [];
+let readyForLinking = 0; //Prevents an error created when switching collections before adding an image to the page
+let add_email_to_list = 0;
+let add_image_to_list = 0;
+let add_collection_to_list = 0;
+let image_alert = 0;
+let not_same = 0;
 option_active = document.querySelector('option:checked'); //Keeps track of the current selected option
 option_linked=document.querySelectorAll('.test-text');
 
@@ -47,6 +47,8 @@ function validateForm(){
         $('#invalid-email').css('display','none');
         let changeSelect = document.querySelector('#select');
         changeSelect.selectedIndex=1; //Changes the select option to the newly created email address which will always be at position 1
+        option_active = email_collect[0]; //Sets the option_active value to the first element of the array email_collect,
+                                          //allowing images to be added to the first collection 
       }
       else{
         for(i=0;i<usedEmailAddress.length;i++){ 
@@ -92,9 +94,9 @@ function validateForm(){
   
           add_email_to_list =0; 
           $('#valid-email').css('display','block');
-          alert('Email address validated'); //Alert added here instead of where the validation occurs because duplicates are not valid
+          //alert('Email address validated'); //Message added here instead of where the validation occurs because duplicates are not valid
           //email_collect does the same thing as email_collect but written in a different way for a different purpose
-          changeSelect();
+          //changeSelect();
           //let email_collect= document.querySelectorAll("[id^='div-']"); 
           for (p=0; p<email_collect.length; p++){
             if (collectionGroup.length === 0){ //If there are no existing collections, there are no duplicates
@@ -120,6 +122,9 @@ function validateForm(){
             let changeSelect = document.querySelector('#select');
             console.log(p+1);
             changeSelect.selectedIndex=p+1; //Changes the currently selected option to the newly added email address
+            option_active = email_collect[p]; //Sets the option_active value to pth element of the array email_collect, 
+                                              //allowing images to be added to collection p
+            $('p').css('display','none'); //Added to make the images related to the previous collection hide 
           }
           
 
@@ -165,6 +170,7 @@ function newImage(){
 }
 
 add_image.addEventListener('click',()=>{
+  console.log(option_active);
   let email_collect= document.querySelectorAll(("[id^='div-']"));
   if (option_active.textContent !== "Select"){ 
     if (usedImage.length == 0){
@@ -209,6 +215,7 @@ add_image.addEventListener('click',()=>{
             $('#valid-email').css('display','none');
             $('#duplicate-email').css('display','none');
             $('#required-email').css('display','none');
+            $('#invalid-email').css('display','none');
           }
         }
       }
@@ -224,12 +231,14 @@ add_image.addEventListener('click',()=>{
     $('#duplicate-email').css('display','none');
     $('#img-in-collection').css('display','none');
     $('#required-email').css('display','none');
-    
+    $('#invalid-email').css('display','none');
   }
 });
 
 let collection_deleter_one = document.querySelector('#delete-one');
-collection_deleter_one.addEventListener('click',()=>{ 
+collection_deleter_one.addEventListener('click',()=>{ //Currently refuses to move the last collection from list
+  option_active = document.querySelector('option:checked'); 
+  //Reasignment of option_active necessary as the option_active value doesn't automatically update to the correct value after deleteing a collection
   if (option_active.textContent !== "Select"){
     for(o=0;o<collectionGroup.length;o+=1){ 
       if (option_active.textContent == collectionGroup[o].textContent){ 
@@ -243,23 +252,22 @@ collection_deleter_one.addEventListener('click',()=>{
             email_collect[r].remove(); //Removes the collection from the html code
             quantity_email-=1; 
             collectionGroup= collectionGroup.filter(n=>n); 
-            changeSelect(); 
             break; //Ends the loop, preventing the deletion of the collections that come after the deleted option
 
           }
         }
        }
       }
-    }                              
-    else{ //You are not allowed to delete the default "Select" option, so this code will be triggered if you try to delete it
-      $('#collection-to-delete').css('display','block'); //Message telling the user they must select a collection to delete
-      $('#no-collection').css('display','none');
-      $('#valid-email').css('display','none');
-      $('#duplicate-email').css('display','none');
-      $('#img-in-collection').css('display','none');
-      $('#required-email').css('display','none');
-
-    }
+  }                              
+  else{ //You are not allowed to delete the default "Select" option, so this code will be triggered if you try to delete it
+    $('#collection-to-delete').css('display','block'); //Message telling the user they must select a collection to delete
+    $('#no-collection').css('display','none');
+    $('#valid-email').css('display','none');
+    $('#duplicate-email').css('display','none');
+    $('#img-in-collection').css('display','none');
+    $('#required-email').css('display','none');
+    $('#invalid-email').css('display','none');
+  }
 });
 
 let collection_deleter_all = document.querySelector('#delete-all');
@@ -276,13 +284,14 @@ collection_deleter_all.addEventListener('click',()=>{
   $('#duplicate-email').css('display','none');
   $('#img-in-collection').css('display','none');
   $('#required-email').css('display','none');
+  $('#invalid-email').css('display','none');
 
   let email_collect= document.querySelectorAll("[id^='div-']"); 
   for (s=0;s<email_collect.length;s+=1){
     email_collect[s].remove(); //Removes each collection
   }
   quantity_email=0; //Resets the email quantity to 0 
-  changeSelect();
+  //changeSelect();
 });
 
 function swapCollection(){ //When the select option is changed, this code is executed
@@ -308,6 +317,7 @@ function swapCollection(){ //When the select option is changed, this code is exe
     $('#duplicate-email').css('display','none'); 
     $('#img-in-collection').css('display','none');
     $('#required-email').css('display','none');
+    $('#invalid-email').css('display','none');
     }
   }
 
@@ -318,7 +328,6 @@ newImage(); //Generates a new image which replaces the seeded image
 
 //Feedback tasks to action:
 //Professional styling
-//Create a styled error message instead of using an alert
 //Allows the images to display in a row for iPad+ viewports
 
 $('#no-collection').css('display','none');
