@@ -8,6 +8,7 @@ button {
   border: none;
   color: white;
   cursor: pointer;
+  padding: 3px 5px;
 }
 
 img {
@@ -181,5 +182,18 @@ p.test-text {
 @media (min-width: 768px) and (max-width: 993px) {
   .flex-btn .orange-btn {
     margin-left: 0px;
+  }
+}
+.flex-btn .green-btn {
+  margin-right: 10px;
+}
+@media (min-width: 559px) {
+  .flex-btn .green-btn {
+    margin-right: 0px;
+  }
+}
+@media (min-width: 768px) and (max-width: 993px) {
+  .flex-btn .green-btn {
+    margin-right: 0px;
   }
 }/*# sourceMappingURL=styles.css.map */

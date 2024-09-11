@@ -9,7 +9,7 @@
 }
 
 .collection-pictures{
-    div{
+    div{ //Flex allows the assigned images to appear in row and the wrap 
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;

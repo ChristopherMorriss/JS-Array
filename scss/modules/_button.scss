@@ -24,12 +24,21 @@
     
     margin-bottom:10px;
     .orange-btn{
-        margin-left: 10px;
+        margin-left: 10px; //To stop the "New Image" button from touching the box border on smaller screens
         @include media(small){
             margin-left: 0px;
         }
         @include media(medium){
             margin-left: 0px;
+        }
+    }
+    .green-btn{
+        margin-right: 10px; //To stop the "Add Image" button from touching the box border on smaller screens
+        @include media(small){
+            margin-right: 0px;
+        }
+        @include media(medium){
+            margin-right: 0px;
         }
     }
 }

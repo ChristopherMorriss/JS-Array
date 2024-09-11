@@ -25,6 +25,7 @@ function messageHide(){ //Function that hides all success and error messages
   $('#invalid-email').css('display','none');
   $('#success-delete-one').css('display','none');
   $('#success-delete-all').css('display','none');
+  $('#success-img').css('display','none');
 }
 
 function changeSelect(){
@@ -157,6 +158,7 @@ function validateForm(){
 let img_select= document.querySelector('img');
 let add_image= document.querySelector('#add-image');
 function newImage(){
+  messageHide();
   image_rand ="https://picsum.photos/500/500?random=" + new Date().getTime(); //Random image generator
   img_select.src= image_rand;  
 }
@@ -171,6 +173,8 @@ add_image.addEventListener('click',()=>{
           usedImage.push(image_rand); 
           email_collect[m-1].innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
           readyForLinking+=1;
+          messageHide();
+          $('#success-img').css('display','block');
       }
     }  
     }
@@ -207,6 +211,7 @@ add_image.addEventListener('click',()=>{
             email_collect[m-1].innerHTML +=`<p class="test-text"><img class="${option_active.textContent}" src=${image_rand}></p>`;
             add_image_to_list =0;
             messageHide();
+            $('#success-img').css('display','block');
           }
           else if (image_alert==1){
             messageHide();
@@ -267,6 +272,7 @@ collection_deleter_one.addEventListener('click',()=>{ //Currently refuses to mov
             email_collect[r].remove(); //Removes the collection from the html code
             quantity_email-=1; 
             collectionGroup= collectionGroup.filter(n=>n); 
+            messageHide();
             $('#success-delete-one').css('display','block');
             break; //Ends the loop, preventing the deletion of the collections that come after the deleted option
 
@@ -274,9 +280,8 @@ collection_deleter_one.addEventListener('click',()=>{ //Currently refuses to mov
         }
        }
     }
-    if (collectionGroup.length==0){
-      ////console.log('Deleted last collection...');
-      usedImage=[];
+    if (collectionGroup.length==0){ 
+      usedImage=[]; //Removes all of the images from the usedImage if there are no collections 
     }
   }                      
 
@@ -284,6 +289,9 @@ collection_deleter_one.addEventListener('click',()=>{ //Currently refuses to mov
     messageHide();
     $('#collection-to-delete').css('display','block'); //Message telling the user they must select a collection to delete
   }
+  option_active = document.querySelector('option'); 
+  //Forces the active option back to "Select" otherwise the active option value will be considered null 
+  //console.log(option_active);
 });
 
 let collection_deleter_all = document.querySelector('#delete-all');
@@ -332,7 +340,7 @@ newImage(); //Generates a new image which replaces the seeded image
 
 //Feedback tasks to action:
 //Professional styling
-//Allows the images to display in a row for iPad+ viewports
+
 
 
 
