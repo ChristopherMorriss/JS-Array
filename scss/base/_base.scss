@@ -33,4 +33,18 @@ header{
     font-size: 26px;
 }
 
-
+p.test-text{
+    max-width: 100%;
+    @include media(medium){
+        max-width: 47%;
+        margin-left: 10px;
+    }
+    @include media(large){
+        max-width: 31%;
+        margin-left: 10px;
+    }
+    @include media(x-large){
+        max-width: 24%;
+        margin-left: 10px;
+    }
+}

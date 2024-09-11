@@ -123,7 +123,7 @@ function validateForm(){
               
             }
             let changeSelect = document.querySelector('#select');
-            console.log(p+1);
+            //console.log(p+1);
             changeSelect.selectedIndex=p+1; //Changes the currently selected option to the newly added email address
             option_active = email_collect[p]; //Sets the option_active value to pth element of the array email_collect, 
                                               //allowing images to be added to collection p
@@ -162,7 +162,7 @@ function newImage(){
 }
 
 add_image.addEventListener('click',()=>{
-  console.log(option_active);
+  //console.log(option_active);
   let email_collect= document.querySelectorAll(("[id^='div-']"));
   if (option_active.textContent !== "Select"){ 
     if (usedImage.length == 0){
@@ -178,16 +178,16 @@ add_image.addEventListener('click',()=>{
       for(m=1;m<select.length;m+=1){ 
         let email_collect= document.querySelectorAll(("[id^='div-']"));
         option_active=document.querySelector('option:checked');
-        console.log(option_active);
-        console.log(email_collect[m-1].textContent);
+        //console.log(option_active);
+        //console.log(email_collect[m-1].textContent);
         if(option_active.textContent === email_collect[m-1].textContent){ //Assigns the image to the div linked with the email address
           option_linked=document.querySelectorAll('.test-text');
           option_image=document.querySelectorAll('p img');
-          console.log(option_linked.length);
-          console.log(option_active);
+          //console.log(option_linked.length);
+          //console.log(option_active);
           for(let k=0; k<option_linked.length; k++){ //0 for others but 1 for duplicate new addresses
-            console.log(option_active); 
-            console.log(option_image[k].className);
+            //console.log(option_active); 
+            //console.log(option_image[k].className);
             if(option_active.textContent === option_image[k].className){ //Checks which images belong to the active collection
               if(option_image[k].src== image_rand){ //Checks if image in collection is the current image displayed at the top
                 image_alert=1; //Triggers a warning message outside of the loop, to prevent it being output multiple times
@@ -229,26 +229,23 @@ let collection_deleter_one = document.querySelector('#delete-one');
 collection_deleter_one.addEventListener('click',()=>{ //Currently refuses to move the last collection from list
   option_active = document.querySelector('option:checked'); 
   option_linked=document.querySelectorAll('p img');
-  console.log(option_linked.length);
+  //console.log(option_linked.length);
   for (x=0;x<usedImage.length;x++){ //Checks through the collection images to see how many of each of the usedImages have been used
     for(z=0;z<option_linked.length;z++){
-      console.log(option_linked[z].src);
-      console.log(usedImage[x]);
+      //console.log(option_linked[z].src);
+      //console.log(usedImage[x]);
       if(option_linked[z].src === usedImage[x]){
         repeat_link +=1;
-        console.log(repeat_link);
-      }
-      else{
-        console.log('not considered same');
+        //console.log(repeat_link);
       }
     }
     //This needs to be changed to target specific deleted images
     if (repeat_link === 1){ //If the usedImage is only linked to one image then it should be removed along with the collection
       //I think this code is flawed because it targets and removes images if they only appear once, regardless of whether they
       //are going to be deleted or not. However, it is very unlikely the same image will reappear so this doesn't cause
-      // any duplication issues but it may cause issues with the usedImage count
-      console.log('removing link...');
-      console.log(usedImage[x]);
+      //any duplication issues but it may cause issues with the usedImage count
+      //console.log('removing link...');
+      //console.log(usedImage[x]);
       delete usedImage[x];
       usedImage = usedImage.filter(n=>n);
 
@@ -260,8 +257,8 @@ collection_deleter_one.addEventListener('click',()=>{ //Currently refuses to mov
       if (option_active.textContent == collectionGroup[o].textContent){ 
         let email_collect= document.querySelectorAll("[id^='div-']"); 
         for (r=0;r<email_collect.length;r+=1){
-          console.log(collectionGroup[o].textContent);
-          console.log(email_collect[r].textContent);
+          //console.log(collectionGroup[o].textContent);
+          //console.log(email_collect[r].textContent);
           if (collectionGroup[o].textContent == email_collect[r].textContent){ 
             delete usedEmailAddress[r]; 
             usedEmailAddress=usedEmailAddress.filter(n=>n); //Removes the empty elements which appear after removing an array item
@@ -278,17 +275,9 @@ collection_deleter_one.addEventListener('click',()=>{ //Currently refuses to mov
        }
     }
     if (collectionGroup.length==0){
-      console.log('Deleted last collection...');
+      ////console.log('Deleted last collection...');
       usedImage=[];
     }
-    // else{
-    //   option_linked=document.querySelectorAll('.test-text');
-    //   console.log(usedImage.length);
-    //   for(y=0;y<usedImage.length;y++){
-    //     console.log(usedImage[y]);
-    // }
-
-    // }
   }                      
 
   else{ //You are not allowed to delete the default "Select" option, so this code will be triggered if you try to delete it
@@ -332,7 +321,7 @@ function swapCollection(){ //When the select option is changed, this code is exe
      
     }
   if (option_active.textContent !== "Select"){
-    messageHide();
+      messageHide();
     }
   }
 

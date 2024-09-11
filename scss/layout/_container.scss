@@ -8,3 +8,10 @@
     margin-bottom: 5px;
 }
 
+.collection-pictures{
+    div{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+}

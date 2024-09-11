@@ -32,6 +32,28 @@ header {
   font-size: 26px;
 }
 
+p.test-text {
+  max-width: 100%;
+}
+@media (min-width: 768px) and (max-width: 993px) {
+  p.test-text {
+    max-width: 47%;
+    margin-left: 10px;
+  }
+}
+@media (min-width: 994px) {
+  p.test-text {
+    max-width: 31%;
+    margin-left: 10px;
+  }
+}
+@media (min-width: 1260px) {
+  p.test-text {
+    max-width: 24%;
+    margin-left: 10px;
+  }
+}
+
 @font-face {
   font-family: "open sans";
   src: url("../fonts/OpenSans-VariableFont_wdth,wght.ttf") format("truetype");
@@ -106,6 +128,12 @@ header {
   margin-bottom: 5px;
 }
 
+.collection-pictures div {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
 .green-btn {
   background-color: rgb(5, 174, 22);
 }
@@ -140,5 +168,18 @@ header {
 @media (min-width: 559px) {
   .flex-btn {
     width: 500px;
+  }
+}
+.flex-btn .orange-btn {
+  margin-left: 10px;
+}
+@media (min-width: 559px) {
+  .flex-btn .orange-btn {
+    margin-left: 0px;
+  }
+}
+@media (min-width: 768px) and (max-width: 993px) {
+  .flex-btn .orange-btn {
+    margin-left: 0px;
   }
 }/*# sourceMappingURL=styles.css.map */

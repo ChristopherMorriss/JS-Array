@@ -23,5 +23,13 @@
     }
     
     margin-bottom:10px;
-    
+    .orange-btn{
+        margin-left: 10px;
+        @include media(small){
+            margin-left: 0px;
+        }
+        @include media(medium){
+            margin-left: 0px;
+        }
+    }
 }
