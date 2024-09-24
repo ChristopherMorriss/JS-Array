@@ -166,8 +166,14 @@ function newImage(){
 add_image.addEventListener('click',()=>{
   //console.log(option_active);
   let email_collect= document.querySelectorAll(("[id^='div-']"));
-  if (option_active.textContent !== "Select"){ 
+  if (option_active.textContent !== "Select"){  
     if (usedImage.length == 0){
+      if (select.length == 1){ 
+        //This code is used to display the no collection error after pressing deleting all collections 
+        //when there is an active option that isn't "Select"
+        messageHide();
+        $('#no-collection').css('display','block');
+      }
       for (m=1;m<select.length;m+=1){ //m starts at 1 to skip the default "Select" option which is fixed at position 0
         if (option_active.textContent === email_collect[m-1].textContent){ 
           usedImage.push(image_rand); 
@@ -175,8 +181,11 @@ add_image.addEventListener('click',()=>{
           readyForLinking+=1;
           messageHide();
           $('#success-img').css('display','block');
-      }
-    }  
+        }
+        else{
+          $('#no-collection').css('display','block');
+        }
+      }  
     }
     else{
       for(m=1;m<select.length;m+=1){ 

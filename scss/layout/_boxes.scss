@@ -25,13 +25,13 @@
     @include flex($flex-display:flex,
                   $flex-direction: column,
                   $flex-wrap: wrap,
-                  $flex-align: center,
+                  $flex-align: null,
                   $flex-justify: space-between
                 );
 }
 
 #email{
-  width:75%;
+  width:76%;
   @extend %vertical_margin;
 }
 
@@ -59,4 +59,16 @@
   background-color: $green;
   width: calc(75% + 49px);
   display:none;
+}
+
+// .static-input{
+//   position: relative;
+//   left: 30%;
+//   width: 46%;
+// }
+
+.img-collection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
